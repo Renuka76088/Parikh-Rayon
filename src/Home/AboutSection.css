@@ -1,0 +1,76 @@
+.about-section {
+  padding: 100px 20px;
+  background: linear-gradient(to right, #f8f9fc, #eef2f7);
+}
+
+/* Image Card */
+.image-card {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+  transition: 0.4s ease;
+}
+
+.image-card img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s ease;
+}
+
+.image-card:hover img {
+  transform: scale(1.08);
+}
+
+/* Content Box */
+.content-box {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+}
+
+/* Tag */
+.tag {
+  display: inline-block;
+  background: #0c2d57;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+/* Heading */
+.content-box h1 {
+  font-size: 38px;
+  margin-bottom: 15px;
+}
+
+.content-box h1 span {
+  color: #0c2d57;
+}
+
+/* Paragraph */
+.content-box p {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #555;
+}
+
+/* Button */
+.read-more-btn {
+  margin-top: 20px;
+  padding: 12px 24px;
+  border: none;
+  background: #0c2d57;
+  color: #fff;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.read-more-btn:hover {
+  background: #144a8a;
+  transform: translateY(-3px);
+}

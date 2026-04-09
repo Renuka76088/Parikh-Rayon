@@ -1,0 +1,201 @@
+/* Header Styles */
+
+/* Desktop par is logo ko hide karne ke liye */
+.mobile-only-logo {
+    display: none !important;
+}
+
+/* Jab screen 991px se choti ho (Mobile/Tablet) tab dikhayein */
+@media (max-width: 991px) {
+    .mobile-only-logo {
+        display: flex !important;
+    }
+
+    .wrap-header-mobile {
+        display: flex !important;
+        min-height: 80px;
+    }
+}
+
+/* Floating Button Styling */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 30px; /* Desktop par thoda upar */
+    right: 30px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    z-index: 99999; /* Isse button hamesha top par rahega */
+    transition: all 0.3s ease;
+}
+
+.whatsapp-icon {
+    width: 35px;
+    height: 35px;
+}
+
+/* Hover Effect */
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    background-color: #128c7e;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 991px) {
+    .whatsapp-float {
+        width: 55px;
+        height: 55px;
+        bottom: 20px; /* Mobile par thoda niche aur corner mein */
+        right: 20px;
+    }
+    .whatsapp-icon {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+/* Chat Float Button */
+.chat-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 100px; /* Below WhatsApp */
+    right: 30px;
+    background-color: #717fe0;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    z-index: 99999;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.chat-icon {
+    font-size: 24px;
+}
+
+/* Hover Effect */
+.chat-float:hover {
+    transform: scale(1.1);
+    background-color: #5a67d8;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+/* Chat Modal */
+.chat-modal {
+    position: fixed;
+    bottom: 170px;
+    right: 30px;
+    width: 300px;
+    height: 400px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    z-index: 100000;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-header {
+    background: #717fe0;
+    color: white;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.chat-header button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.chat-body {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background: #f8f9fa;
+}
+
+.chat-message {
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 18px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.chat-message.user {
+    background: #717fe0;
+    color: white;
+    margin-left: auto;
+    text-align: right;
+}
+
+.chat-message.bot {
+    background: #e9ecef;
+    color: #333;
+}
+
+.chat-footer {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #dee2e6;
+}
+
+.chat-footer input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #dee2e6;
+    border-radius: 20px;
+    outline: none;
+}
+
+.chat-footer button {
+    background: #717fe0;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 991px) {
+    .chat-float {
+        width: 55px;
+        height: 55px;
+        bottom: 85px;
+        right: 20px;
+    }
+    .chat-modal {
+        bottom: 150px;
+        right: 20px;
+        width: 280px;
+        height: 350px;
+    }
+}
+
+/* Mobile Menu Toggle */
+.menu-mobile.show {
+    display: block !important;
+}

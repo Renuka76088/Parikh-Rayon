@@ -1,0 +1,30 @@
+.isotope-grid .block2-pic {
+    height: 320px !important;
+    overflow: hidden;
+    position: relative;
+}
+
+.isotope-grid .block2-pic img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    transition: transform 0.4s ease;
+}
+
+.isotope-grid .block2-pic:hover img {
+    transform: scale(1.08);
+}
+
+.isotope-grid .block2 {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.isotope-grid .block2-txt {
+    flex-grow: 1;
+}
+
+.filter-tope-group button.how-active1 {
+    color: #222;
+}

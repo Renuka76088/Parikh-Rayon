@@ -1,0 +1,33 @@
+/* Blog Page Styles */
+
+/* Premium Hover & Overlay */
+.blog-card-premium {
+  position: relative;
+}
+
+.blog-content-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+  height: 100%;
+  transition: all 0.5s;
+}
+
+.blog-card-premium:hover .blog-content-overlay {
+  background: linear-gradient(to top, rgba(113, 127, 224, 0.8) 0%, rgba(0,0,0,0.2) 100%);
+}
+
+.hov-link-white:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.blog-card-standard:hover {
+  transform: translateY(-10px);
+}
+
+.opacity-8 {
+  opacity: 0.8;
+}

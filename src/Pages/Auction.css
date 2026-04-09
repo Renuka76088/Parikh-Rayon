@@ -1,0 +1,168 @@
+.auction-section {
+  padding: 90px 20px;
+  background: #f5f7ff;
+}
+
+.auction-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.05fr 1.45fr;
+  gap: 30px;
+}
+
+.auction-panel {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(36, 47, 89, 0.08);
+  overflow: hidden;
+}
+
+.status-card {
+  padding: 55px 45px;
+  background: #f8f9ff;
+  height: 100%;
+}
+
+.status-card h4 {
+  margin: 0 0 30px;
+  font-size: 30px;
+  color: #5a5cff;
+  letter-spacing: 1px;
+}
+
+.status-badge {
+  background: #717fe0;
+  border-radius: 16px;
+  padding: 28px 30px;
+  color: #ffffff;
+}
+
+.status-badge span {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.status-badge h2 {
+  margin: 12px 0 0;
+  font-size: 34px;
+  line-height: 1.1;
+}
+
+.form-panel {
+  padding: 45px;
+}
+
+.auction-form h4 {
+  margin: 0 0 35px;
+  font-size: 30px;
+  color: #252e5a;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 22px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 15px;
+  color: #525f7f;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid #d8dcef;
+  padding: 18px 20px;
+  font-size: 15px;
+  color: #2d3954;
+  background: #f8f9ff;
+  outline: none;
+  transition: border-color 0.25s ease;
+}
+
+.form-group textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.file-group input {
+  padding: 14px 18px;
+}
+
+.row.two-column {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.checkbox-group label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  color: #505f7e;
+}
+
+.checkbox-group input {
+  width: 18px;
+  height: 18px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 18px 0;
+  border: none;
+  border-radius: 999px;
+  background: #717fe0;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.submit-button:hover {
+  background: #4f5ce3;
+  transform: translateY(-1px);
+}
+
+.terms-link {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.terms-link a {
+  color: #40446d;
+  text-decoration: underline;
+  font-size: 15px;
+}
+
+@media (max-width: 992px) {
+  .auction-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .auction-section {
+    padding: 60px 15px;
+  }
+
+  .status-card,
+  .form-panel {
+    padding: 30px 20px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 16px 16px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}

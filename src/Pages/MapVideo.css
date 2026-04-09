@@ -1,0 +1,127 @@
+.map-video-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9ff 0%, #f0f3ff 100%);
+  padding-top: 80px;
+}
+
+.map-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.map-header {
+  margin-bottom: 40px;
+}
+
+.map-title {
+  font-size: 42px;
+  font-weight: 700;
+  color: #1e2937;
+  margin-bottom: 12px;
+  letter-spacing: -1px;
+}
+
+.map-subtitle {
+  font-size: 18px;
+  color: #64748b;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Main Map Container - Clean Look */
+.map-wrapper {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  box-shadow: 0 25px 70px rgba(113, 127, 224, 0.15);
+  border-radius: 30px;
+  overflow: hidden;
+  background: white;
+  padding: 20px;
+}
+
+.india-map-svg {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.08));
+}
+
+/* Video Styling */
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 22px;
+  overflow: hidden;
+}
+
+.bg-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    rgba(113, 127, 224, 0.12),
+    rgba(30, 41, 55, 0.18)
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Floating Badges */
+.floating-badge {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 12px 26px;
+  border-radius: 50px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  color: #717fe0;
+  font-size: 15px;
+  z-index: 10;
+  transition: all 0.4s ease;
+  border: none;           /* Border removed */
+}
+
+.floating-badge:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(113, 127, 224, 0.25);
+}
+
+.top-left {
+  top: 18%;
+  left: 8%;
+}
+
+.bottom-right {
+  bottom: 18%;
+  right: 8%;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .map-title {
+    font-size: 36px;
+  }
+  .map-wrapper {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .floating-badge {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}

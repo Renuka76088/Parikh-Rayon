@@ -1,0 +1,26 @@
+/* Banner Section Styles */
+
+/* FIXED SIZE BANNER CARDS */
+.block1.wrap-pic-w {
+    height: 400px;                    /* fixed card height - change if needed */
+    overflow: hidden;
+    position: relative;
+    border-radius: 0;                 /* keep square/rect look */
+}
+.block1.wrap-pic-w img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;     /* fits any image size perfectly */
+    transition: transform 0.4s ease;
+}
+.block1.wrap-pic-w:hover img {
+    transform: scale(1.08);           /* subtle zoom on hover */
+}
+.block1-txt {
+    background: rgba(0,0,0,0.4) !important;      /* overlay for text readability */
+}
+@media (max-width: 767px) {
+    .block1.wrap-pic-w {
+        height: 320px;                /* smaller on mobile */
+    }
+}
