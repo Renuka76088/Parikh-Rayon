@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Pages/blog-section.css';
+import { ArrowRight } from 'lucide-react';
 
 // Import blog images
 import blog01 from '../images/blog-01.jpg';
@@ -12,80 +12,74 @@ const BlogSection = () => {
       id: 1,
       image: blog01,
       author: 'Nancy Ward',
-      date: 'July 22, 2017',
-      title: '8 Inspiring Ways to Wear Dresses in the Winter',
-      description: 'Duis ut velit gravida nibh bibendum commodo. Suspendisse pellentesque mattis augue id euismod. Interdum et male-suada fames'
+      date: 'April 05, 2026',
+      category: 'FABRIC TRENDS',
+      title: '8 Inspiring Ways to Style Rayon in Winter',
+      description: 'Discover how modern textile blends are redefining winter fashion with breathable yet warm textures.'
     },
     {
       id: 2,
       image: blog02,
       author: 'Nancy Ward',
-      date: 'July 18, 2017',
-      title: 'The Great Big List of Men\'s Gifts for the Holidays',
-      description: 'Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla in tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit ame'
+      date: 'March 28, 2026',
+      category: 'MANUFACTURING',
+      title: 'The Future of Sustainable Textile Production',
+      description: 'An inside look at how ethical sourcing and quality control are shaping the next generation of apparel.'
     },
     {
       id: 3,
       image: blog03,
       author: 'Nancy Ward',
-      date: 'July 2, 2017',
-      title: '5 Winter-to-Spring Fashion Trends to Try Now',
-      description: 'Proin nec vehicula lorem, a efficitur ex. Nam vehicula nulla vel erat tincidunt, sed hendrerit ligula porttitor. Fusce sit amet maximus nunc'
+      date: 'March 15, 2026',
+      category: 'INDUSTRY',
+      title: '5 Textile Trends to Watch This Spring',
+      description: 'From bold patterns to minimalist weaves, here is what is trending in the global textile market.'
     }
   ];
 
   return (
-    <section className="sec-blog bg0 p-t-60 p-b-90">
+    <section style={sectionStyle}>
       <div className="container">
-        <div className="p-b-66">
-          <h3 className="ltext-105 cl5 txt-center respon1">
-            Our Blogs
-          </h3>
+        
+        {/* Header */}
+        <div style={headerStyle}>
+          <span style={subtitleStyle}>JOURNAL & NEWS</span>
+          <h3 style={titleStyle}>OUR LATEST BLOGS</h3>
+          <div style={underlineStyle}></div>
         </div>
 
-        <div className="row">
+        {/* ✅ Responsive Grid */}
+        <div style={rowStyle}>
           {blogs.map((blog) => (
-            <div key={blog.id} className="col-sm-6 col-md-4 p-b-40">
-              <div className="blog-item">
-                <div className="hov-img0">
-                  <a href="blog-detail.html">
-                    <img src={blog.image} alt="IMG-BLOG" />
+            <div key={blog.id} style={cardStyle}>
+              
+              {/* Image */}
+              <div style={imageContainer}>
+                <img src={blog.image} alt={blog.title} style={imgStyle} />
+                <div style={tagStyle}>{blog.category}</div>
+              </div>
+
+              {/* Content */}
+              <div style={contentArea}>
+                <div style={metaData}>
+                  <span>{blog.date}</span>
+                  <span style={{ margin: '0 10px', color: '#717fe0' }}>/</span>
+                  <span>BY {blog.author.toUpperCase()}</span>
+                </div>
+
+                <h4 style={blogTitle}>
+                  <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>
+                    {blog.title}
                   </a>
-                </div>
+                </h4>
 
-                <div className="p-t-15">
-                  <div className="stext-107 flex-w p-b-14">
-                    <span className="m-r-3">
-                      <span className="cl4">
-                        By
-                      </span>
+                <p style={descriptionStyle}>
+                  {blog.description}
+                </p>
 
-                      <span className="cl5">
-                        {blog.author}
-                      </span>
-                    </span>
-
-                    <span>
-                      <span className="cl4">
-                        on
-                      </span>
-
-                      <span className="cl5">
-                        {blog.date}
-                      </span>
-                    </span>
-                  </div>
-
-                  <h4 className="p-b-12">
-                    <a href="blog-detail.html" className="mtext-101 cl2 hov-cl1 trans-04">
-                      {blog.title}
-                    </a>
-                  </h4>
-
-                  <p className="stext-108 cl6">
-                    {blog.description}
-                  </p>
-                </div>
+                <a href="#" style={readMoreLink}>
+                  READ MORE <ArrowRight size={14} style={{ marginLeft: '10px' }} />
+                </a>
               </div>
             </div>
           ))}
@@ -93,6 +87,108 @@ const BlogSection = () => {
       </div>
     </section>
   );
+};
+
+// --- Styles ---
+
+const sectionStyle = {
+  padding: '100px 20px',
+  backgroundColor: '#ffffff',
+};
+
+const headerStyle = {
+  textAlign: 'center',
+  marginBottom: '60px'
+};
+
+const subtitleStyle = {
+  fontSize: '11px',
+  letterSpacing: '5px',
+  color: '#888',
+  fontWeight: '700',
+  display: 'block',
+  marginBottom: '10px'
+};
+
+const titleStyle = {
+  fontSize: '32px',
+  fontWeight: '900',
+  color: '#1a1a1a',
+};
+
+const underlineStyle = {
+  width: '40px',
+  height: '4px',
+  backgroundColor: '#717fe0',
+  margin: '15px auto 0'
+};
+
+/* ✅ GRID FIX */
+const rowStyle = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+  gap: '25px'
+};
+
+const cardStyle = {
+  border: '1px solid #eeeeee',
+  backgroundColor: '#fff',
+  borderRadius: '0px',
+  display: 'flex',
+  flexDirection: 'column'
+};
+
+const imageContainer = {
+  position: 'relative',
+  height: '240px',
+  overflow: 'hidden'
+};
+
+const imgStyle = {
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover'
+};
+
+const tagStyle = {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  backgroundColor: '#1a1a1a',
+  color: '#fff',
+  padding: '8px 12px',
+  fontSize: '10px',
+  fontWeight: '700'
+};
+
+const contentArea = {
+  padding: '20px'
+};
+
+const metaData = {
+  fontSize: '11px',
+  color: '#999',
+  marginBottom: '10px'
+};
+
+const blogTitle = {
+  fontSize: '16px',
+  fontWeight: '700',
+  marginBottom: '10px'
+};
+
+const descriptionStyle = {
+  fontSize: '14px',
+  color: '#666',
+  marginBottom: '15px'
+};
+
+const readMoreLink = {
+  fontSize: '12px',
+  fontWeight: '700',
+  color: '#1a1a1a',
+  textDecoration: 'none',
+  borderBottom: '2px solid #717fe0'
 };
 
 export default BlogSection;

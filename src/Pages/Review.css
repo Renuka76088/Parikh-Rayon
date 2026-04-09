@@ -2,6 +2,34 @@
   padding: 4rem 0;
   background: #f8f9ff;
 }
+.review-section {
+    /* Header ki height ke hisab se padding add karein (usually 80px - 100px) */
+    padding-top: 100px; 
+    padding-bottom: 80px;
+    background-color: #f9f9f9;
+    width: 100%;
+}
+
+/* Responsive fix: Mobile par header aksar chota hota hai */
+@media (max-width: 768px) {
+    .review-section {
+        padding-top: 80px;
+    }
+}
+
+.review-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Review Grid ko responsive banane ke liye bootstrap ya flex use karein */
+.review-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
 
 .review-container {
   max-width: 1180px;

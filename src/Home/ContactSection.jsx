@@ -1,55 +1,145 @@
-import '../Pages/main.css'
+import React from 'react';
+import '../Pages/main.css';
 
 const ContactSection = () => {
+  const primaryColor = "#717fe0";
+
   return (
-    <section className="bg0 p-t-100 p-b-100">
+    <section className="bg0 p-t-100 p-b-100" style={{ overflow: 'hidden' }}>
       <div className="container">
-        <div className="row p-b-60">
-          <div className="col-12 txt-center">
-            <h3 className="ltext-105 cl2 p-b-15" style={{ fontWeight: 300, textTransform: 'uppercase' }}>
+        
+        {/* Title Section */}
+        <div className="row p-b-50">
+          <div className="col-12">
+            <h3 className="ltext-105 cl2 p-b-10" style={{ fontWeight: 600, textTransform: 'uppercase' }}>
               Contact Us
             </h3>
-            <p className="stext-113 cl6" style={{ fontSize: '18px', maxWidth: '600px', margin: '0 auto' }}>
+            <p className="stext-113 cl6">
               We are here to help you bring your textile vision to life.
             </p>
           </div>
         </div>
 
-        <div className="row">
-          <div className="col-md-6 p-b-30">
-            <div style={{ border: '1px solid #717fe0', height: '500px', borderRadius: '4px', overflow: 'hidden' }}>
+        {/* --- Responsive Container --- */}
+        <div style={{ 
+          display: 'flex', 
+          flexWrap: 'wrap', 
+          margin: '0 -15px', 
+          alignItems: 'stretch'
+        }}>
+          
+          {/* Left: Map */}
+          <div 
+            className="contact-col"
+            style={{ 
+              flex: '0 0 50%', 
+              maxWidth: '50%', 
+              padding: '0 15px' 
+            }}
+          >
+            <div style={{ 
+              border: `1px solid #e6e6e6`, 
+              height: '100%', 
+              minHeight: '500px',
+              borderRadius: '0px' 
+            }}>
               <iframe
+                title="Google Map"
                 src="https://www.google.com/maps?q=Raipur,Chhattisgarh,INDIA&output=embed"
                 width="100%"
                 height="100%"
-                style={{ border: 0 }}
+                style={{ border: 0, display: 'block', minHeight: '500px' }}
                 allowFullScreen=""
                 loading="lazy"
               ></iframe>
             </div>
           </div>
 
-          <div className="col-md-6 p-b-30">
-            <form className="p-l-20 p-l-0-md">
-              <div className="p-b-25">
-                <span className="stext-102 cl2 p-b-8" style={{ color: '#717fe0' }}>Full Name</span>
-                <input className="bor8 stext-111 cl2 size-116 p-lr-20" type="text" placeholder="Enter your name" />
-              </div>
-              <div className="p-b-25">
-                <span className="stext-102 cl2 p-b-8" style={{ color: '#717fe0' }}>Email Address</span>
-                <input className="bor8 stext-111 cl2 size-116 p-lr-20" type="email" placeholder="example@mail.com" />
-              </div>
-              <div className="p-b-35">
-                <span className="stext-102 cl2 p-b-8" style={{ color: '#717fe0' }}>Message</span>
-                <textarea className="bor8 stext-111 cl2 size-120 p-lr-20 p-tb-15" placeholder="How can we assist you?"></textarea>
-              </div>
-              <button className="flex-c-m stext-101 cl0 size-121 trans-04" style={{ backgroundColor: '#717fe0' }}>
-                SEND MESSAGE
-              </button>
-            </form>
+          {/* Right: Form */}
+          <div 
+            className="contact-col"
+            style={{ 
+              flex: '0 0 50%', 
+              maxWidth: '50%', 
+              padding: '0 15px' 
+            }}
+          >
+            <div style={{ 
+              height: '100%', 
+              display: 'flex', 
+              flexDirection: 'column', 
+              justifyContent: 'center',
+              border: '1px solid #e6e6e6',
+              padding: '40px',
+              borderRadius: '0px'
+            }}>
+              <form style={{ width: '100%' }}>
+                <div style={{ marginBottom: '25px' }}>
+                  <span style={{ color: primaryColor, fontWeight: '700', fontSize: '12px', marginBottom: '8px', display: 'block' }}>
+                    FULL NAME
+                  </span>
+                  <input 
+                    type="text" 
+                    placeholder="Enter your name" 
+                    style={{ width: '100%', height: '50px', border: '1px solid #e6e6e6', padding: '0 20px', outline: 'none' }} 
+                  />
+                </div>
+
+                <div style={{ marginBottom: '25px' }}>
+                  <span style={{ color: primaryColor, fontWeight: '700', fontSize: '12px', marginBottom: '8px', display: 'block' }}>
+                    EMAIL ADDRESS
+                  </span>
+                  <input 
+                    type="email" 
+                    placeholder="example@mail.com" 
+                    style={{ width: '100%', height: '50px', border: '1px solid #e6e6e6', padding: '0 20px', outline: 'none' }} 
+                  />
+                </div>
+
+                <div style={{ marginBottom: '30px' }}>
+                  <span style={{ color: primaryColor, fontWeight: '700', fontSize: '12px', marginBottom: '8px', display: 'block' }}>
+                    MESSAGE
+                  </span>
+                  <textarea 
+                    placeholder="How can we assist you?" 
+                    style={{ width: '100%', height: '140px', border: '1px solid #e6e6e6', padding: '15px 20px', outline: 'none', resize: 'none' }}
+                  ></textarea>
+                </div>
+
+                <button 
+                  style={{ 
+                    width: '100%', 
+                    height: '50px', 
+                    backgroundColor: primaryColor, 
+                    color: '#fff', 
+                    border: 'none', 
+                    fontWeight: '700', 
+                    letterSpacing: '1px',
+                    cursor: 'pointer'
+                  }}
+                >
+                  SEND MESSAGE
+                </button>
+              </form>
+            </div>
           </div>
+
         </div>
       </div>
+
+      {/* ✅ Responsive CSS */}
+      <style>
+        {`
+          @media (max-width: 768px) {
+            .contact-col {
+              flex: 0 0 100% !important;
+              max-width: 100% !important;
+              margin-bottom: 20px;
+            }
+          }
+        `}
+      </style>
+
     </section>
   );
 };

@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="row">
           
           {/* Logo Section */}
-          <div className="col-lg-3 col-md-6 col-12 mb-4">
+          <div className="col-lg-4 col-md-6 col-12 mb-">
             <a href="/" className="d-flex align-items-center mb-4 text-decoration-none">
               
               <div className="border border-white rounded p-2 mr-3 bg-white bg-opacity-10 shadow">
@@ -38,7 +38,7 @@ const Footer = () => {
           </div>
 
           {/* Product Line */}
-          <div className="col-lg-3 col-md-6 col-12 mb-4">
+          <div className="col-lg-3 col-md-6 col-12 mb-">
             <h4 className="text-white h6 font-weight-semibold mb-4">
               Product Line
             </h4>
@@ -60,7 +60,7 @@ const Footer = () => {
           </div>
 
           {/* Contact */}
-          <div className="col-lg-3 col-md-6 col-12 mb-4">
+          <div className="col-lg-2 col-md-6 col-12 mb-">
             <h4 className="text-white h6 font-weight-semibold mb-4">
               GET IN TOUCH
             </h4>
@@ -79,7 +79,7 @@ const Footer = () => {
           </div>
 
           {/* Newsletter */}
-          <div className="col-lg-3 col-md-6 col-12 mb-4">
+          <div className="col-lg-2 col-md-6 col-12 mb-">
             <h4 className="text-white h6 font-weight-semibold mb-4">
               B2B Insights
             </h4>

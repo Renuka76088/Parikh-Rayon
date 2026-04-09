@@ -107,3 +107,71 @@
     letter-spacing: 2px;
   }
 }
+
+.tender-section {
+    /* Header ki height ke barabar padding (Usually 80px to 100px) */
+    padding-top: 100px; 
+    padding-bottom: 80px;
+    background-color: #fcfcfc;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+}
+
+.tender-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.tender-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.tender-header h3 {
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #222;
+}
+
+.tender-divider {
+    width: 50px;
+    height: 3px;
+    background: #717fe0;
+    margin: 15px auto;
+}
+
+/* Responsive Grid/Card Fix */
+.tender-card {
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+}
+
+.tender-status {
+    margin-top: 30px;
+    padding: 30px;
+    background: #fdfdfd;
+    border: 1px dashed #ccc;
+}
+
+.tender-icon i {
+    font-size: 40px;
+    color: #717fe0;
+    margin-bottom: 15px;
+}
+
+/* --- Mobile Responsive --- */
+@media (max-width: 768px) {
+    .tender-section {
+        padding-top: 80px; /* Mobile header thoda chota hota hai */
+    }
+    
+    .tender-card {
+        padding: 20px;
+    }
+}
