@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { quotationApi } from "../utils/api";
+import { Loader2 } from "lucide-react";
 import "./Quotation.css";
 
 const initialState = {
@@ -10,20 +12,50 @@ const initialState = {
   email: "",
   quotationType: "",
   particulars: "",
+  siteId: "ParekhRayon05"
 };
 
 const Quotation = () => {
   const [formValues, setFormValues] = useState(initialState);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState({ type: '', text: '' });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormValues((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    alert("Quotation request submitted. Our team will contact you shortly.");
-    setFormValues(initialState);
+    setLoading(true);
+    setMessage({ type: '', text: '' });
+
+    try {
+      const data = new FormData();
+      data.append("siteId", formValues.siteId);
+      data.append("traderName", formValues.traderName);
+      data.append("businessName", formValues.businessName);
+      data.append("businessAddress", formValues.address);
+      data.append("gstNo", formValues.gstNo);
+      data.append("mobileNo", formValues.mobile);
+      data.append("email", formValues.email);
+      data.append("quotationType", formValues.quotationType);
+      data.append("particulars", formValues.particulars);
+
+      const response = await quotationApi.submit(data);
+
+      if (response.data.success) {
+        setMessage({ type: 'success', text: 'Quotation request submitted successfully!' });
+        setFormValues(initialState);
+      } else {
+        setMessage({ type: 'error', text: response.data.message || 'Something went wrong.' });
+      }
+    } catch (error) {
+      console.error("Submission Error:", error);
+      setMessage({ type: 'error', text: 'Server error. Please try again later.' });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -42,6 +74,12 @@ const Quotation = () => {
               <div className="quotation-form-header">
                 <h4>Estimate Builder</h4>
               </div>
+
+              {message.text && (
+                <div className={`message-alert ${message.type}`}>
+                  {message.text}
+                </div>
+              )}
 
               <div className="form-row">
                 <label>
@@ -155,7 +193,13 @@ const Quotation = () => {
               </div>
 
               <div className="form-actions">
-                <button type="submit">Generate Official Quotation</button>
+                <button type="submit" disabled={loading} className="submit-btn-rayon">
+                  {loading ? <Loader2 className="animate-spin" /> : "Generate Official Quotation"}
+                </button>
+              </div>
+              
+              <div className="form-footer-link">
+                <a href="mailto:trade-enquiry@parekhrayon.com">trade-enquiry@parekhrayon.com</a>
               </div>
 
               <p className="quotation-note">

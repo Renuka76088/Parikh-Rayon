@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../Home/Header";
+import { productApi } from "../utils/api";
+import { Loader2 } from "lucide-react";
 import "./Products.css";
 
-const productsData = [
+const staticProductsData = [
   {
     id: 1,
     name: "Floral Rayon A-Line Kurti",
@@ -62,20 +64,63 @@ const productsData = [
 ];
 
 const Products = () => {
+  const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState("*");
   const [search, setSearch] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [categories, setCategories] = useState([]);
 
-  const filteredProducts = productsData.filter((item) => {
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await productApi.getAll("ParekhRayon05");
+        if (response.data.success && response.data.data.length > 0) {
+          const dynamicProducts = response.data.data.map(p => ({
+            id: p._id,
+            name: p.title,
+            category: p.category,
+            image: `http://localhost:5000/${p.image}`,
+            type: "" // site-specific type not used in backend yet
+          }));
+          setProducts(dynamicProducts);
+          
+          const uniqueCats = [...new Set(dynamicProducts.map(p => p.category))];
+          setCategories(uniqueCats);
+        } else {
+          setProducts(staticProductsData);
+          setCategories(["printed-rayon", "plain-rayon", "embroidered-rayon", "designer-rayon"]);
+        }
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+        setProducts(staticProductsData);
+        setCategories(["printed-rayon", "plain-rayon", "embroidered-rayon", "designer-rayon"]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  const filteredProducts = products.filter((item) => {
     const matchCategory = filter === "*" || item.category === filter;
     const matchSearch = item.name.toLowerCase().includes(search.toLowerCase());
     return matchCategory && matchSearch;
   });
 
+  if (loading) {
+    return (
+      <div className="flex-c-m flex-col w-full" style={{ height: "100vh" }}>
+        <Loader2 className="animate-spin text-[#333]" size={50} />
+        <p className="p-t-20 stext-101 cl6">Loading Rayon Collection...</p>
+      </div>
+    );
+  }
+
   return (
     <>
-      
       <section className="bg0 p-t-100 p-b-140" style={{ marginTop: "50px" }}>
         <div className="container">
           <div className="p-b-10">
@@ -90,30 +135,15 @@ const Products = () => {
               >
                 All Products
               </button>
-              <button
-                className={`stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${filter === "printed-rayon" ? "how-active1" : ""}`}
-                onClick={() => setFilter("printed-rayon")}
-              >
-                Printed Rayon
-              </button>
-              <button
-                className={`stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${filter === "plain-rayon" ? "how-active1" : ""}`}
-                onClick={() => setFilter("plain-rayon")}
-              >
-                Plain Rayon
-              </button>
-              <button
-                className={`stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${filter === "embroidered-rayon" ? "how-active1" : ""}`}
-                onClick={() => setFilter("embroidered-rayon")}
-              >
-                Embroidered Rayon
-              </button>
-              <button
-                className={`stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${filter === "designer-rayon" ? "how-active1" : ""}`}
-                onClick={() => setFilter("designer-rayon")}
-              >
-                Designer Rayon
-              </button>
+              {categories.map(cat => (
+                <button
+                  key={cat}
+                  className={`stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${filter === cat ? "how-active1" : ""}`}
+                  onClick={() => setFilter(cat)}
+                >
+                  {cat.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                </button>
+              ))}
             </div>
 
             <div className="flex-w flex-c-m m-tb-10">
@@ -167,112 +197,49 @@ const Products = () => {
                     <li className="p-b-6">
                       <a href="#" className="filter-link stext-106 trans-04">Newest Arrivals</a>
                     </li>
-                    <li className="p-b-6">
-                      <a href="#" className="filter-link stext-106 trans-04 filter-link-active">Price: Low to High</a>
-                    </li>
-                    <li className="p-b-6">
-                      <a href="#" className="filter-link stext-106 trans-04">Price: High to Low</a>
-                    </li>
                   </ul>
-                </div>
-                <div className="filter-col2 p-r-15 p-b-27">
-                  <div className="mtext-102 cl2 p-b-15">Price</div>
-                  <ul>
-                    <li className="p-b-6">
-                      <a href="#" className="filter-link stext-106 trans-04 filter-link-active">All</a>
-                    </li>
-                  </ul>
-                </div>
-                <div className="filter-col3 p-r-15 p-b-27">
-                  <div className="mtext-102 cl2 p-b-15">Color</div>
-                  <ul>
-                    <li className="p-b-6">
-                      <span className="fs-15 lh-12 m-r-6" style={{ color: "#222" }}>
-                        <i className="zmdi zmdi-circle"></i>
-                      </span>
-                      <a href="#" className="filter-link stext-106 trans-04">Black</a>
-                    </li>
-                    <li className="p-b-6">
-                      <span className="fs-15 lh-12 m-r-6" style={{ color: "#4272d7" }}>
-                        <i className="zmdi zmdi-circle"></i>
-                      </span>
-                      <a href="#" className="filter-link stext-106 trans-04">Blue</a>
-                    </li>
-                    <li className="p-b-6">
-                      <span className="fs-15 lh-12 m-r-6" style={{ color: "#00ad5f" }}>
-                        <i className="zmdi zmdi-circle"></i>
-                      </span>
-                      <a href="#" className="filter-link stext-106 trans-04">Green</a>
-                    </li>
-                    <li className="p-b-6">
-                      <span className="fs-15 lh-12 m-r-6" style={{ color: "#fa4251" }}>
-                        <i className="zmdi zmdi-circle"></i>
-                      </span>
-                      <a href="#" className="filter-link stext-106 trans-04">Red</a>
-                    </li>
-                    <li className="p-b-6">
-                      <span className="fs-15 lh-12 m-r-6" style={{ color: "#aaa" }}>
-                        <i className="zmdi zmdi-circle-o"></i>
-                      </span>
-                      <a href="#" className="filter-link stext-106 trans-04">White</a>
-                    </li>
-                  </ul>
-                </div>
-                <div className="filter-col4 p-b-27">
-                  <div className="mtext-102 cl2 p-b-15">Tags</div>
-                  <div className="flex-w p-t-4 m-r--5">
-                    <a href="#" className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">Rayon</a>
-                    <a href="#" className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">Ethnic</a>
-                    <a href="#" className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">Comfort</a>
-                    <a href="#" className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">Printed</a>
-                    <a href="#" className="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">Sustainable</a>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Products Grid */}
-      <div className="row isotope-grid">
-  {filteredProducts.map((item) => (
-    <div key={item.id} className={`col-6 col-md-3 col-lg-3" p-b-35 isotope-item ${item.category} ${item.type}`}>
-      {/* Block2 ko thoda shadow aur border-radius dene ke liye styles */}
-      <div className="block2 shadow-sm rounded-lg overflow-hidden trans-04 hov-shadow-md" style={{ border: '1px solid #f0f0f0' }}>
-        
-        <div className="block2-pic hov-img0 pos-relative">
-          {/* Image quality maintain rakhte hue */}
-          <img src={item.image} alt={item.name} style={{ height: '300px', objectFit: 'cover', width: '100%' }} />
+          <div className="row isotope-grid">
+            {filteredProducts.map((item) => (
+              <div key={item.id} className={`col-6 col-md-3 col-lg-3 p-b-35 isotope-item ${item.category}`}>
+                <div className="block2 shadow-sm rounded-lg overflow-hidden trans-04 hov-shadow-md" style={{ border: '1px solid #f0f0f0' }}>
+                  <div className="block2-pic hov-img0 pos-relative">
+                    <img src={item.image} alt={item.name} style={{ height: '300px', objectFit: 'cover', width: '100%' }} />
+                    <a href="#" className="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+                      <i className="zmdi zmdi-eye m-r-5"></i> View Detail
+                    </a>
+                  </div>
 
-          {/* Quick View Button with Icon */}
-          <a href="#" className="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
-            <i className="zmdi zmdi-eye m-r-5"></i> View Detail
-          </a>
-        </div>
+                  <div className="block2-txt flex-w flex-t p-t-14 p-b-14 p-lr-15 bg-white">
+                    <div className="block2-txt-child1 flex-col-l">
+                      <a href="#" className="stext-104 cl4 hov-cl1 trans-04 p-b-6 fontWeight-bold" style={{ fontSize: '15px', fontWeight: '600' }}>
+                        {item.name}
+                      </a>
+                      <span className="stext-105 cl3" style={{ fontSize: '12px', color: '#888', textTransform: 'uppercase' }}>
+                        <i className="zmdi zmdi-label m-r-5"></i> {item.category.replace('-', ' ')}
+                      </span>
+                    </div>
 
-        <div className="block2-txt flex-w flex-t p-t-14 p-b-14 p-lr-15 bg-white">
-          <div className="block2-txt-child1 flex-col-l">
-            {/* Product Title - thoda bold aur clean */}
-            <a href="#" className="stext-104 cl4 hov-cl1 trans-04 p-b-6 fontWeight-bold" style={{ fontSize: '15px', fontWeight: '600' }}>
-              {item.name}
-            </a>
-
-            {/* Category Tag - UI ko professional banane ke liye */}
-            <span className="stext-105 cl3" style={{ fontSize: '12px', color: '#888', textTransform: 'uppercase' }}>
-              <i className="zmdi zmdi-label m-r-5"></i> {item.category.replace('-', ' ')}
-            </span>
+                    <div className="block2-txt-child2 flex-r p-t-3">
+                      <a href="#" className="btn-addwish-b2 dis-block pos-relative trans-04">
+                        <i className="zmdi zmdi-favorite-outline cl2 fs-20 hov-cl1 trans-04"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+            {filteredProducts.length === 0 && (
+              <div className="w-full text-center p-t-50 p-b-50">
+                <p className="stext-101 cl6">No products found matching your criteria.</p>
+              </div>
+            )}
           </div>
-
-          <div className="block2-txt-child2 flex-r p-t-3">
-            {/* Wishlist Icon - Isko thoda modern banaya hai */}
-            <a href="#" className="btn-addwish-b2 dis-block pos-relative trans-04">
-               <i className="zmdi zmdi-favorite-outline cl2 fs-20 hov-cl1 trans-04"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  ))}
-</div>
 
           {/* Load More */}
           <div className="flex-c-m flex-w w-full p-t-40">
@@ -286,4 +253,4 @@ const Products = () => {
   );
 };
 
-export default Products;  
+export default Products;

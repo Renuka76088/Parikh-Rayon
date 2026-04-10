@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { auctionApi } from "../utils/api";
+import { Loader2 } from "lucide-react";
 import "./Auction.css";
 
 const Auction = () => {
@@ -9,25 +11,73 @@ const Auction = () => {
     gstNumber: "",
     mobile: "",
     email: "",
+    gstCert: null,
     agree: false,
+    siteId: "ParekhRayon05"
   });
 
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState({ type: '', text: '' });
+
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
+    const { name, value, type, checked, files } = e.target;
+    if (type === "checkbox") {
+      setFormData((prev) => ({ ...prev, [name]: checked }));
+    } else if (type === "file") {
+      setFormData((prev) => ({ ...prev, [name]: files[0] }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.agree) {
       alert("Please confirm that all provided details are legally valid.");
       return;
     }
-    console.log("Auction Registration:", formData);
-    alert("Auction registration submitted successfully.");
+
+    setLoading(true);
+    setMessage({ type: '', text: '' });
+
+    try {
+      const data = new FormData();
+      data.append("siteId", formData.siteId);
+      data.append("participantName", formData.participantName);
+      data.append("legalBusinessName", formData.businessName);
+      data.append("businessAddress", formData.address);
+      data.append("gstNo", formData.gstNumber);
+      data.append("mobileNo", formData.mobile);
+      data.append("email", formData.email);
+      
+      if (formData.gstCert) {
+        data.append("gstCertificate", formData.gstCert);
+      }
+
+      const response = await auctionApi.submit(data);
+
+      if (response.data.success) {
+        setMessage({ type: 'success', text: 'Auction registration submitted successfully!' });
+        setFormData({
+          participantName: "",
+          businessName: "",
+          address: "",
+          gstNumber: "",
+          mobile: "",
+          email: "",
+          gstCert: null,
+          agree: false,
+          siteId: "ParekhRayon05"
+        });
+      } else {
+        setMessage({ type: 'error', text: response.data.message || 'Something went wrong.' });
+      }
+    } catch (error) {
+      console.error("Submission Error:", error);
+      setMessage({ type: 'error', text: 'Server error. Please try again later.' });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -46,6 +96,12 @@ const Auction = () => {
         <div className="auction-panel form-panel">
           <form className="auction-form" onSubmit={handleSubmit}>
             <h4>Participant Details</h4>
+
+            {message.text && (
+              <div className={`message-alert ${message.type}`}>
+                {message.text}
+              </div>
+            )}
 
             <div className="form-group">
               <input
@@ -123,7 +179,12 @@ const Auction = () => {
 
             <div className="form-group file-group">
               <label>Upload GST Certificate (PDF/JPG)</label>
-              <input type="file" name="gst-file" accept=".pdf,.jpg,.jpeg,.png" />
+              <input 
+                type="file" 
+                name="gstCert" 
+                onChange={handleChange}
+                accept=".pdf,.jpg,.jpeg,.png" 
+              />
             </div>
 
             <div className="form-group checkbox-group">
@@ -138,9 +199,13 @@ const Auction = () => {
               </label>
             </div>
 
-            <button type="submit" className="submit-button">
-              REGISTER FOR AUCTION
+            <button type="submit" className="submit-button" disabled={loading}>
+              {loading ? <Loader2 className="animate-spin" /> : "REGISTER FOR AUCTION"}
             </button>
+            
+            <div className="form-footer-link" style={{ textAlign: 'center', marginTop: '10px' }}>
+              <a href="mailto:services@parekhrayon.com">services@parekhrayon.com</a>
+            </div>
 
             <div className="terms-link">
               <a href="#">View Participant Terms & Conditions</a>

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { tradeEnquiryApi } from "../utils/api";
+import { Loader2 } from "lucide-react";
 import "./Enquiry.css";
 
 const Enquiry = () => {
@@ -12,7 +14,11 @@ const Enquiry = () => {
     purchaseType: "",
     gstCert: null,
     agree: false,
+    siteId: "ParekhRayon05"
   });
+
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState({ type: '', text: '' });
 
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
@@ -25,25 +31,56 @@ const Enquiry = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.agree) {
       alert("Please agree to the undertaking.");
       return;
     }
-    alert("Application submitted successfully!");
-    // Reset form
-    setFormData({
-      traderName: "",
-      businessName: "",
-      address: "",
-      gstNo: "",
-      mobile: "",
-      email: "",
-      purchaseType: "",
-      gstCert: null,
-      agree: false,
-    });
+
+    setLoading(true);
+    setMessage({ type: '', text: '' });
+
+    try {
+      const data = new FormData();
+      data.append("siteId", formData.siteId);
+      data.append("traderName", formData.traderName);
+      data.append("businessName", formData.businessName);
+      data.append("businessAddress", formData.address);
+      data.append("gstNo", formData.gstNo);
+      data.append("mobileNo", formData.mobile);
+      data.append("email", formData.email);
+      data.append("enquiryType", formData.purchaseType);
+      
+      if (formData.gstCert) {
+        data.append("gstCertificate", formData.gstCert);
+      }
+
+      const response = await tradeEnquiryApi.submit(data);
+
+      if (response.data.success) {
+        setMessage({ type: 'success', text: 'Application submitted successfully!' });
+        setFormData({
+          traderName: "",
+          businessName: "",
+          address: "",
+          gstNo: "",
+          mobile: "",
+          email: "",
+          purchaseType: "",
+          gstCert: null,
+          agree: false,
+          siteId: "ParekhRayon05"
+        });
+      } else {
+        setMessage({ type: 'error', text: response.data.message || 'Something went wrong.' });
+      }
+    } catch (error) {
+      console.error("Submission Error:", error);
+      setMessage({ type: 'error', text: 'Server error. Please try again later.' });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handlePreview = () => {
@@ -76,6 +113,12 @@ const Enquiry = () => {
           <div className="enquiry-form-card">
             <form className="enquiry-form" onSubmit={handleSubmit}>
               <h4>Apply for Membership</h4>
+
+              {message.text && (
+                <div className={`message-alert ${message.type}`}>
+                  {message.text}
+                </div>
+              )}
 
               <div className="form-row">
                 <input
@@ -185,10 +228,16 @@ const Enquiry = () => {
               </div>
 
               <div className="form-actions">
-                <button type="button" onClick={handlePreview}>
+                <button type="button" onClick={handlePreview} disabled={loading}>
                   Preview
                 </button>
-                <button type="submit">Submit Application</button>
+                <button type="submit" disabled={loading} className="submit-btn-rayon">
+                  {loading ? <Loader2 className="animate-spin" /> : "Submit Application"}
+                </button>
+              </div>
+              
+              <div className="form-footer-link">
+                <a href="mailto:trade-enquiry@parekhrayon.com">trade-enquiry@parekhrayon.com</a>
               </div>
             </form>
           </div>

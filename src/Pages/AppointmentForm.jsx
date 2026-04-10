@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { appointmentApi } from '../utils/api';
+import { Loader2 } from 'lucide-react';
 import './AppointmentForm.css';
 
 const AppointmentForm = () => {
@@ -10,20 +12,66 @@ const AppointmentForm = () => {
     email: '',
     idType: '',
     visitReason: '',
+    proofFile: null,
+    siteId: "ParekhRayon05"
   });
 
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState({ type: '', text: '' });
+
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value, type, files } = e.target;
+    if (type === "file") {
+      setFormData((prev) => ({ ...prev, [name]: files[0] }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Appointment Data:', formData);
-    alert('Appointment request submitted successfully!');
-    // Add your API call here
+    setLoading(true);
+    setMessage({ type: '', text: '' });
+
+    try {
+      const data = new FormData();
+      data.append("siteId", formData.siteId);
+      data.append("visitorName", formData.visitorName);
+      data.append("businessName", formData.businessName);
+      data.append("visitorAddress", formData.address);
+      data.append("mobileNo", formData.mobile);
+      data.append("email", formData.email);
+      data.append("proofType", formData.idType);
+      data.append("reasonForVisit", formData.visitReason);
+      
+      if (formData.proofFile) {
+        data.append("proofFile", formData.proofFile);
+      }
+
+      const response = await appointmentApi.submit(data);
+
+      if (response.data.success) {
+        setMessage({ type: 'success', text: 'Appointment requested successfully!' });
+        setFormData({
+          visitorName: '',
+          businessName: '',
+          address: '',
+          mobile: '',
+          email: '',
+          idType: '',
+          visitReason: '',
+          proofFile: null,
+          siteId: "ParekhRayon05"
+        });
+      } else {
+        setMessage({ type: 'error', text: response.data.message || 'Something went wrong.' });
+      }
+    } catch (error) {
+      console.error("Submission Error:", error);
+      setMessage({ type: 'error', text: 'Server error. Please try again later.' });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -44,12 +92,23 @@ const AppointmentForm = () => {
                 *Appointments must be booked at least 24 hours in advance for factory visits.
               </p>
             </div>
+            
+            <div className="official-assistance">
+               <span>Official Assistance:</span>
+               <p><a href="mailto:appointment@parekhrayon.com" style={{color: '#fff'}}>appointment@parekhrayon.com</a></p>
+            </div>
           </div>
 
           {/* Right Side - Form */}
           <div className="form-side">
             <form onSubmit={handleSubmit}>
               <h4 className="form-title">Request Appointment</h4>
+
+              {message.text && (
+                <div className={`message-alert ${message.type}`}>
+                  {message.text}
+                </div>
+              )}
 
               <div className="input-group">
                 <input
@@ -111,7 +170,7 @@ const AppointmentForm = () => {
               </div>
 
               <div className="input-group">
-                <label>Select ID Type for Proof</label>
+                <label>Select ID Type for Proof (Roll-down)</label>
                 <select
                   name="idType"
                   value={formData.idType}
@@ -130,6 +189,7 @@ const AppointmentForm = () => {
                 <input
                   type="file"
                   name="proofFile"
+                  onChange={handleChange}
                   accept=".pdf,.jpg,.jpeg,.png"
                 />
               </div>
@@ -144,9 +204,13 @@ const AppointmentForm = () => {
                 />
               </div>
 
-              <button type="submit" className="submit-btn">
-                CONFIRM APPOINTMENT
+              <button type="submit" className="submit-btn" disabled={loading}>
+                {loading ? <Loader2 className="animate-spin" /> : "CONFIRM APPOINTMENT"}
               </button>
+              
+              <div className="form-footer-link" style={{ textAlign: 'center', marginTop: '10px' }}>
+                <a href="mailto:appointment@parekhrayon.com">appointment@parekhrayon.com</a>
+              </div>
             </form>
           </div>
         </div>
