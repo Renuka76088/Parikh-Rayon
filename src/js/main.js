@@ -1,7 +1,7 @@
 
 import './jquery-global.js';
-import 'animsition/dist/js/animsition.min.js';
-import 'animsition/dist/css/animsition.min.css';
+import '../vendor/animsition/js/animsition.min.js';
+import '../vendor/animsition/css/animsition.min.css';
 
 (function ($) {
     "use strict";
