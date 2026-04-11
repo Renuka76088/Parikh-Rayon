@@ -9,7 +9,7 @@ const AboutPage = () => {
       {/* Title Section */}
       <section
         className="about-banner"
-        style={{ backgroundImage: "url('/images/About.png')" }}
+        style={{ backgroundImage: "url('https://media.istockphoto.com/id/1165496613/photo/lilac-viscose-lining-texture-background-pattern.jpg?s=612x612&w=0&k=20&c=7-AAtcb-uw3fZoK8V9TRmEkMq2sgSgslBPX2qxsuC4o=')" }}
       >
         <h2>About Parekh Textile</h2>
       </section>

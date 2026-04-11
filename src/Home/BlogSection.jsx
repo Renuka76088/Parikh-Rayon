@@ -10,7 +10,7 @@ const BlogSection = () => {
   const blogs = [
     {
       id: 1,
-      image: blog01,
+      image: "https://img.freepik.com/premium-photo/variety-rainbow-colored-fabrics-are-displayed_1221953-10882.jpg?ga=GA1.1.124606815.1772781809&semt=ais_hybrid&w=740&q=80",
       author: 'Nancy Ward',
       date: 'April 05, 2026',
       category: 'FABRIC TRENDS',
@@ -19,7 +19,7 @@ const BlogSection = () => {
     },
     {
       id: 2,
-      image: blog02,
+      image: "https://img.freepik.com/premium-photo/indian-saris_163782-4521.jpg?ga=GA1.1.124606815.1772781809&semt=ais_hybrid&w=740&q=80",
       author: 'Nancy Ward',
       date: 'March 28, 2026',
       category: 'MANUFACTURING',
@@ -28,7 +28,7 @@ const BlogSection = () => {
     },
     {
       id: 3,
-      image: blog03,
+      image: "https://img.freepik.com/free-photo/texture-orange-red-crumpled-fabric_23-2148516009.jpg?ga=GA1.1.124606815.1772781809&semt=ais_hybrid&w=740&q=80",
       author: 'Nancy Ward',
       date: 'March 15, 2026',
       category: 'INDUSTRY',
@@ -40,7 +40,7 @@ const BlogSection = () => {
   return (
     <section style={sectionStyle}>
       <div className="container">
-        
+
         {/* Header */}
         <div style={headerStyle}>
           <span style={subtitleStyle}>JOURNAL & NEWS</span>
@@ -52,7 +52,7 @@ const BlogSection = () => {
         <div style={rowStyle}>
           {blogs.map((blog) => (
             <div key={blog.id} style={cardStyle}>
-              
+
               {/* Image */}
               <div style={imageContainer}>
                 <img src={blog.image} alt={blog.title} style={imgStyle} />

@@ -18,11 +18,13 @@ import Enquiry from './Pages/Enquiry'
 import Header from './Home/Header'
 import MapVideo from './Pages/MapVideo'
 import Circular from './Pages/Circular'
+import ScrollToTop from './Components/ScrollToTop'
 
 function App() {
   return (
     <>
     <BrowserRouter>
+    <ScrollToTop />
     <Header/>
     <Routes>
       <Route path='/' element={<Home/>} />
