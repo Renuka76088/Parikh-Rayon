@@ -250,3 +250,22 @@
 .panel-filter.show {
   display: block !important;
 }
+
+/* Mobile Responsiveness for Bootstrap col-6 Products */
+@media (max-width: 575px) {
+  .isotope-grid .block2-pic {
+    height: 180px !important;  /* mobile me 2 column ke hisaab se height kam ki */
+  }
+  
+  .block2-txt {
+    padding: 10px 5px !important;
+  }
+  
+  .block2-txt-child1 a {
+    font-size: 13px !important;
+  }
+  
+  .block2-txt-child1 span {
+    font-size: 10px !important;
+  }
+}

@@ -82,10 +82,9 @@ const Products = () => {
             name: p.title,
             category: p.category,
             image: `http://localhost:5000/${p.image}`,
-            type: "" // site-specific type not used in backend yet
+            type: "" 
           }));
           setProducts(dynamicProducts);
-          
           const uniqueCats = [...new Set(dynamicProducts.map(p => p.category))];
           setCategories(uniqueCats);
         } else {
@@ -100,7 +99,6 @@ const Products = () => {
         setLoading(false);
       }
     };
-
     fetchProducts();
   }, []);
 
@@ -121,10 +119,63 @@ const Products = () => {
 
   return (
     <>
-      <section className="bg0 p-t-100 p-b-140" style={{ marginTop: "50px" }}>
+      <section className="bg0 p-t-100 p-b-140" style={{ marginTop: "50px", overflowX: 'hidden' }}>
+        
+        {/* CSS INJECTION: Exactly matching the uploaded pixel copy */}
+        <style>
+          {`
+            .isotope-grid {
+              display: flex;
+              flex-wrap: wrap;
+              margin-left: -8px;
+              margin-right: -8px;
+            }
+
+            .product-col {
+              padding-left: 8px;
+              padding-right: 8px;
+              margin-bottom: 25px;
+              width: 25%; /* Desktop: 4 items */
+            }
+
+            @media (max-width: 991px) {
+              .product-col { width: 33.33%; } /* Tablet */
+            }
+
+            @media (max-width: 576px) {
+              .container {
+                padding-left: 10px;
+                padding-right: 10px;
+              }
+              .product-col {
+                width: 50% !important; /* Mobile: Exact 2 items side-by-side */
+                padding-left: 5px;
+                padding-right: 5px;
+                margin-bottom: 15px;
+              }
+              .block2-txt {
+                padding-left: 10px !important;
+                padding-right: 10px !important;
+              }
+              .stext-104 {
+                font-size: 13px !important;
+                line-height: 1.2 !important;
+                height: 32px;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+              }
+              .product-image-img {
+                height: 180px !important; /* Mobile balanced height */
+              }
+            }
+          `}
+        </style>
+
         <div className="container">
           <div className="p-b-10">
-            <h3 className="ltext-103 cl5">Parekh Rayon Products</h3>
+            <h3 className="ltext-103 cl5" style={{ fontWeight: '800' }}>Parekh Rayon Products</h3>
           </div>
 
           <div className="flex-w flex-sb-m p-b-52">
@@ -165,7 +216,6 @@ const Products = () => {
               </div>
             </div>
 
-            {/* Search Panel */}
             <div className={`dis-none panel-search w-full p-t-10 p-b-15 ${showSearch ? "show" : ""}`}>
               <div className="bor8 dis-flex p-l-15">
                 <button className="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
@@ -174,54 +224,32 @@ const Products = () => {
                 <input
                   className="mtext-107 cl2 size-114 plh2 p-r-15"
                   type="text"
-                  name="search-product"
                   placeholder="Search Rayon Products"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
               </div>
             </div>
-
-            {/* Filter Panel */}
-            <div className={`dis-none panel-filter w-full p-t-10 ${showFilter ? "show" : ""}`}>
-              <div className="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
-                <div className="filter-col1 p-r-15 p-b-27">
-                  <div className="mtext-102 cl2 p-b-15">Sort By</div>
-                  <ul>
-                    <li className="p-b-6">
-                      <a href="#" className="filter-link stext-106 trans-04">Default</a>
-                    </li>
-                    <li className="p-b-6">
-                      <a href="#" className="filter-link stext-106 trans-04">Popularity</a>
-                    </li>
-                    <li className="p-b-6">
-                      <a href="#" className="filter-link stext-106 trans-04">Newest Arrivals</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
           </div>
 
-          {/* Products Grid */}
-          <div className="row isotope-grid">
+          <div className="isotope-grid">
             {filteredProducts.map((item) => (
-              <div key={item.id} className={`col-6 col-md-3 col-lg-3 p-b-35 isotope-item ${item.category}`}>
-                <div className="block2 shadow-sm rounded-lg overflow-hidden trans-04 hov-shadow-md" style={{ border: '1px solid #f0f0f0' }}>
+              <div key={item.id} className={`product-col ${item.category}`}>
+                <div className="block2 shadow-sm rounded-lg overflow-hidden trans-04 hov-shadow-md" style={{ border: '1px solid #f0f0f0', backgroundColor: '#fff' }}>
                   <div className="block2-pic hov-img0 pos-relative">
-                    <img src={item.image} alt={item.name} style={{ height: '300px', objectFit: 'cover', width: '100%' }} />
+                    <img src={item.image} alt={item.name} className="product-image-img" style={{ width: '100%', height: '280px', objectFit: 'cover' }} />
                     <a href="#" className="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
-                      <i className="zmdi zmdi-eye m-r-5"></i> View Detail
+                      Quick View
                     </a>
                   </div>
 
                   <div className="block2-txt flex-w flex-t p-t-14 p-b-14 p-lr-15 bg-white">
                     <div className="block2-txt-child1 flex-col-l">
-                      <a href="#" className="stext-104 cl4 hov-cl1 trans-04 p-b-6 fontWeight-bold" style={{ fontSize: '15px', fontWeight: '600' }}>
+                      <a href="#" className="stext-104 cl4 hov-cl1 trans-04 p-b-6" style={{ fontSize: '14px', fontWeight: '700', textTransform: 'uppercase' }}>
                         {item.name}
                       </a>
-                      <span className="stext-105 cl3" style={{ fontSize: '12px', color: '#888', textTransform: 'uppercase' }}>
-                        <i className="zmdi zmdi-label m-r-5"></i> {item.category.replace('-', ' ')}
+                      <span className="stext-105 cl3" style={{ fontSize: '12px', color: '#999' }}>
+                        Parekh Premium
                       </span>
                     </div>
 
@@ -234,17 +262,12 @@ const Products = () => {
                 </div>
               </div>
             ))}
-            {filteredProducts.length === 0 && (
-              <div className="w-full text-center p-t-50 p-b-50">
-                <p className="stext-101 cl6">No products found matching your criteria.</p>
-              </div>
-            )}
           </div>
 
           {/* Load More */}
           <div className="flex-c-m flex-w w-full p-t-40">
-            <a href="#" className="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-              Load More Rayon Styles
+            <a href="#" className="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04" style={{ fontWeight: '800' }}>
+              LOAD MORE
             </a>
           </div>
         </div>

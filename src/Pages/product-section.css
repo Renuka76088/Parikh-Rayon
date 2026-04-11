@@ -28,3 +28,33 @@
 .filter-tope-group button.how-active1 {
     color: #222;
 }
+
+/* Custom Responsive Styles for Product Grid */
+.parekh-product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.parekh-product-img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+}
+
+/* Mobile specific styles */
+@media (max-width: 575px) {
+    .parekh-product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .parekh-product-img {
+        height: 180px;
+    }
+    
+    .block2-txt {
+        padding: 10px 5px !important;
+    }
+}

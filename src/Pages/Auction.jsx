@@ -85,7 +85,7 @@ const Auction = () => {
       <div className="auction-container">
         <div className="auction-panel status-panel">
           <div className="status-card">
-            <h4>Auction Participation</h4>
+            <h4>e-Auction Participation</h4>
             <div className="status-badge">
               <span>Status:</span>
               <h2>No e-Auction published</h2>

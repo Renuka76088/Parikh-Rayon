@@ -92,14 +92,7 @@ const ProductSection = () => {
         </div>
 
         {/* ✅ FINAL RESPONSIVE GRID */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            gap: '20px',
-            width: '100%',
-          }}
-        >
+        <div className="parekh-product-grid">
           {filteredProducts.map((product, index) => (
             <div key={index}>
               <div
@@ -119,11 +112,7 @@ const ProductSection = () => {
                   <img
                     src={product.image}
                     alt={product.alt}
-                    style={{
-                      width: '100%',
-                      height: '280px',
-                      objectFit: 'cover',
-                    }}
+                    className="parekh-product-img"
                   />
 
                   <a

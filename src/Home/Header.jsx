@@ -138,7 +138,7 @@ const Header = () => {
       </div>
 
       <div style={floatContainer}>
-        <a href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener noreferrer" style={{ ...floatIcon, background: '#25D366' }}>
+        <a href="https://wa.me/916353778329" target="_blank" rel="noopener noreferrer" style={{ ...floatIcon, background: '#25D366' }}>
           <i className="zmdi zmdi-whatsapp"></i>
         </a>
         <div onClick={() => setIsChatOpen(!isChatOpen)} style={{ ...floatIcon, background: primaryColor }}>

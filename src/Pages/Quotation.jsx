@@ -63,7 +63,7 @@ const Quotation = () => {
       <div className="quotation-container">
         <div className="quotation-card">
           <div className="quotation-intro">
-            <h4>Quotation Guidelines</h4>
+            <h4>e-Quotation Guidelines</h4>
             <p>
               Parekh Textile offers a transparent <strong>Quotation Builder</strong> for our B2B partners. Please provide your business details and requirements to generate an official estimate.
             </p>
