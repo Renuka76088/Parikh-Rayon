@@ -57,7 +57,7 @@ const Header = () => {
             <span style={{ color: 'white', fontSize: '40px', fontWeight: 'bold' }}>P</span>
           </div>
           <h2 style={loaderTitle}>PAREKH <span style={{ color: primaryColor }}>RAYON</span></h2>
-          <p style={loaderSubtitle}>RAIPUR, INDIA</p>
+          <p style={loaderSubtitle}>RAIPUR • CG • INDIA</p>
           <div style={loadingBarStyle}>
             <div className="loading-progress" style={progressBarStyle}></div>
           </div>
@@ -97,7 +97,7 @@ const Header = () => {
               <div style={{ fontSize: '18px', fontWeight: '900', color: '#000' }}>
                 PAREKH <span style={{ color: primaryColor }}>RAYON</span>
               </div>
-              <div style={{ fontSize: '8px', color: '#888', letterSpacing: '1px' }}>RAIPUR, CG</div>
+              <div style={{ fontSize: '8px', color: '#888', letterSpacing: '1px' }}>RAIPUR, CG, INDIA</div>
             </div>
           </Link>
 

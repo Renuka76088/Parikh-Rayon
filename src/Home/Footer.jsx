@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="col-lg-4 col-md-6 col-12 mb-">
             <a href="/" className="d-flex align-items-center mb-4 text-decoration-none">
               
-              <div className="border border-white rounded p-2 mr-3 bg-white bg-opacity-10 shadow">
+              <div className="border border-#717fe0 rounded p-2 mr-3 bg-#717fe0 bg-opacity-10 shadow">
                 <span className="text-white font-weight-bold text-xl">P</span>
               </div>
 
@@ -24,7 +24,7 @@ const Footer = () => {
                   </span>
                 </div>
                 <div className="text-muted small font-weight-bold text-uppercase mt-1">
-                  RAIPUR•INDIA
+                  RAIPUR • CG • INDIA
                 </div>
               </div>
             </a>
@@ -68,7 +68,7 @@ const Footer = () => {
             <p className="text-muted mb-3">
               HC Parekh & Associates, Industrial Area, RAIPUR, CG, India 452015.
               <br />
-              <strong>Call:</strong> (+91) 98XXX XXXXX
+              <strong>Call:</strong> (+91) 6353778329
             </p>
 
             <div className="d-flex">
