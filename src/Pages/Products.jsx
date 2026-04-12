@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Home/Header";
-import { productApi } from "../utils/api";
+import { productApi, IMAGE_BASE_URL } from "../utils/api";
 import { Loader2 } from "lucide-react";
 import "./Products.css";
 
@@ -81,7 +81,7 @@ const Products = () => {
             id: p._id,
             name: p.title,
             category: p.category,
-            image: `http://localhost:5000/${p.image}`,
+            image: `${IMAGE_BASE_URL}/${p.image}`,
             type: "" 
           }));
           setProducts(dynamicProducts);

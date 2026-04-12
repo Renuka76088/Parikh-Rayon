@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { blogApi } from "../utils/api";
+import { blogApi, IMAGE_BASE_URL } from "../utils/api";
 import { Loader2 } from "lucide-react";
 import "./Blog.css";
 
@@ -79,7 +79,7 @@ const Blog = () => {
             category: b.category || "Industry Insights",
             title: b.title,
             desc: b.content ? b.content.substring(0, 150) + "..." : "",
-            img: b.thumbnail ? `http://localhost:5000/${b.thumbnail}` : staticBlogData[0].img,
+            img: b.thumbnail ? `${IMAGE_BASE_URL}/${b.thumbnail}` : staticBlogData[0].img,
             date: new Date(b.date || b.createdAt).toLocaleDateString("en-US", {
               day: "numeric",
               month: "long",

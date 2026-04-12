@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { mediaEventApi } from "../utils/api";
+import { mediaEventApi, IMAGE_BASE_URL } from "../utils/api";
 import { Loader2 } from "lucide-react";
 
 const staticMediaItems = [
@@ -49,7 +49,7 @@ const MediaGallery = () => {
             id: m._id,
             category: m.category || "General",
             title: m.title,
-            image: `http://localhost:5000/${m.image.replace(/\\/g, '/')}`
+            image: `${IMAGE_BASE_URL}/${m.image.replace(/\\/g, '/')}`
           }));
           setMediaItems(dynamicMedia);
           const uniqueCats = [...new Set(dynamicMedia.map(m => m.category))];
