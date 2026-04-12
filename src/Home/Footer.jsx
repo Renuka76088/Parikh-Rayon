@@ -5,15 +5,26 @@ const Footer = () => {
     <footer className="bg3 py-5">
       <div className="container">
         <div className="row">
-          
+
           {/* Logo Section */}
           <div className="col-lg-4 col-md-6 col-12 mb-">
+
             <a href="/" className="d-flex align-items-center mb-4 text-decoration-none">
-              
-              <div className="border border-#717fe0 rounded p-2 mr-3 bg-#717fe0 bg-opacity-10 shadow">
-                <span className="text-white font-weight-bold text-xl">P</span>
+
+              {/* Logo */}
+              <div className="rounded mr-3 shadow d-flex align-items-center justify-content-center">
+                <img
+                  src="/5.png"
+                  alt="Logo"
+                  style={{
+                    width: "50px",
+                    height: "50px",
+                    objectFit: "contain"
+                  }}
+                />
               </div>
 
+              {/* Text */}
               <div className="d-flex flex-column">
                 <div className="text-nowrap">
                   <span className="text-white font-weight-bold h5 mr-1">
@@ -27,14 +38,16 @@ const Footer = () => {
                   RAIPUR • CG • INDIA
                 </div>
               </div>
+
             </a>
 
             <p className="text-muted">
-              Parekh Rayon stands for excellence in textile manufacturing. With
-              a core specialization in 14kg Rayon and Liva-approved fabrics, we
-              provide high-grade textile solutions that meet the rigorous
-              standards of the modern fashion and wholesale markets.
+              Parekh Rayon is the trusted Manufacturers & Supplier of the high standard
+              quality of the Rayon Products, from lower range to higher range with different
+              TC at reasonable and low price range with best and premium quality with
+              Quality Assurance and Quality Seal
             </p>
+
           </div>
 
           {/* Product Line */}

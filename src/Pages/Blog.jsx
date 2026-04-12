@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { blogApi } from "../utils/api";
+import { Loader2 } from "lucide-react";
 import "./Blog.css";
 
 // Importing local images (keeping them just in case they revert again)
 import blog06 from "../images/blog-06.jpg";
 
-const blogData = [
+const staticBlogData = [
   {
     id: 1,
     category: "Quality Standards",
@@ -62,6 +64,59 @@ const blogData = [
 ];
 
 const Blog = () => {
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState("*");
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const response = await blogApi.getAll("ParekhRayon05");
+        if (response.data.success && response.data.data.length > 0) {
+          const dynamicBlogs = response.data.data.map((b) => ({
+            id: b._id,
+            category: b.category || "Industry Insights",
+            title: b.title,
+            desc: b.content ? b.content.substring(0, 150) + "..." : "",
+            img: b.thumbnail ? `http://localhost:5000/${b.thumbnail}` : staticBlogData[0].img,
+            date: new Date(b.date || b.createdAt).toLocaleDateString("en-US", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            }),
+          }));
+          setBlogs(dynamicBlogs);
+          const uniqueCats = [...new Set(dynamicBlogs.map((b) => b.category))];
+          setCategories(uniqueCats);
+        } else {
+          setBlogs(staticBlogData);
+          setCategories([...new Set(staticBlogData.map((b) => b.category))]);
+        }
+      } catch (error) {
+        console.error("Failed to fetch blogs:", error);
+        setBlogs(staticBlogData);
+        setCategories([...new Set(staticBlogData.map((b) => b.category))]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchBlogs();
+  }, []);
+
+  const filteredBlogs = blogs.filter((blog) => 
+    filter === "*" || blog.category === filter
+  );
+
+  if (loading) {
+    return (
+      <div className="flex-c-m flex-col w-full" style={{ height: "100vh" }}>
+        <Loader2 className="animate-spin text-[#717fe0]" size={50} />
+        <p className="p-t-20 stext-101 cl6">Fetching Latest Insights...</p>
+      </div>
+    );
+  }
+
   return (
     <section className="blog-section p-t-100 p-b-100">
       <div className="container">
@@ -80,11 +135,32 @@ const Blog = () => {
           </div>
         </div>
 
+        {/* Filter Bar */}
+        <div className="flex-w flex-c-m m-b-40 filter-buttons">
+          <button
+            className={`stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${filter === "*" ? "how-active1" : ""}`}
+            style={{ padding: "8px 20px", borderRadius: "20px", border: "1px solid #ddd", marginBottom: "10px" }}
+            onClick={() => setFilter("*")}
+          >
+            All Insights
+          </button>
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              className={`stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${filter === cat ? "how-active1" : ""}`}
+              style={{ padding: "8px 20px", borderRadius: "20px", border: "1px solid #ddd", marginBottom: "10px" }}
+              onClick={() => setFilter(cat)}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
         {/* Blog Grid */}
         <div className="blog-grid">
-          {blogData.map((blog, index) => {
+          {filteredBlogs.map((blog, index) => {
             // First item automatically becomes the featured/premium card
-            const isPremium = index === 0;
+            const isPremium = index === 0 && filter === "*";
 
             return (
               <div key={blog.id} className={`blog-card ${isPremium ? "premium-card" : "standard-card"}`}>
@@ -130,7 +206,7 @@ const Blog = () => {
           </button>
         </div>
 
-        {/* Pagination */}
+        {/* Pagination placeholder */}
         <div className="pagination-wrapper p-t-60">
           <button className="page-num active">1</button>
           <button className="page-num">2</button>

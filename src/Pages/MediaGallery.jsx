@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { mediaEventApi } from "../utils/api";
+import { Loader2 } from "lucide-react";
 
-const mediaItems = [
+const staticMediaItems = [
   {
     id: 1,
     category: "rayon",
@@ -31,20 +33,54 @@ const mediaItems = [
   },
 ];
 
-const filters = [
-  { label: "All Collections", value: "*" },
-  { label: "Premium Rayon", value: "rayon" },
-  { label: "Manufacturing", value: "factory" },
-  { label: "Brand Shoots", value: "campaign" },
-];
-
 const MediaGallery = () => {
   const [activeFilter, setActiveFilter] = useState("*");
   const [hoveredId, setHoveredId] = useState(null);
+  const [mediaItems, setMediaItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchMedia = async () => {
+      try {
+        const response = await mediaEventApi.getAll("ParekhRayon05");
+        if (response.data.success && response.data.data.length > 0) {
+          const dynamicMedia = response.data.data.map(m => ({
+            id: m._id,
+            category: m.category || "General",
+            title: m.title,
+            image: `http://localhost:5000/${m.image.replace(/\\/g, '/')}`
+          }));
+          setMediaItems(dynamicMedia);
+          const uniqueCats = [...new Set(dynamicMedia.map(m => m.category))];
+          setCategories(uniqueCats);
+        } else {
+          setMediaItems(staticMediaItems);
+          setCategories(["rayon", "factory", "campaign"]);
+        }
+      } catch (error) {
+        console.error("Failed to fetch media events:", error);
+        setMediaItems(staticMediaItems);
+        setCategories(["rayon", "factory", "campaign"]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchMedia();
+  }, []);
 
   const filteredItems = mediaItems.filter((item) =>
     activeFilter === "*" ? true : item.category === activeFilter
   );
+
+  if (loading) {
+    return (
+      <div className="flex-c-m flex-col w-full" style={{ height: "100vh" }}>
+        <Loader2 className="animate-spin text-[#717fe0]" size={50} />
+        <p className="p-t-20 stext-101 cl6">Opening the Gallery...</p>
+      </div>
+    );
+  }
 
   return (
     <section style={sectionStyle}>
@@ -59,18 +95,29 @@ const MediaGallery = () => {
 
         {/* Filter Buttons */}
         <div style={filterWrapper}>
-          {filters.map((filter) => (
+          <button
+            onClick={() => setActiveFilter("*")}
+            style={{
+              ...filterBtnStyle,
+              backgroundColor: activeFilter === "*" ? "#717fe0" : "transparent",
+              color: activeFilter === "*" ? "#fff" : "#555",
+              borderColor: activeFilter === "*" ? "#717fe0" : "#ddd",
+            }}
+          >
+            All Collections
+          </button>
+          {categories.map((cat) => (
             <button
-              key={filter.value}
-              onClick={() => setActiveFilter(filter.value)}
+              key={cat}
+              onClick={() => setActiveFilter(cat)}
               style={{
                 ...filterBtnStyle,
-                backgroundColor: activeFilter === filter.value ? "#717fe0" : "transparent",
-                color: activeFilter === filter.value ? "#fff" : "#555",
-                borderColor: activeFilter === filter.value ? "#717fe0" : "#ddd",
+                backgroundColor: activeFilter === cat ? "#717fe0" : "transparent",
+                color: activeFilter === cat ? "#fff" : "#555",
+                borderColor: activeFilter === cat ? "#717fe0" : "#ddd",
               }}
             >
-              {filter.label}
+              {cat.charAt(0).toUpperCase() + cat.slice(1)}
             </button>
           ))}
         </div>
@@ -248,4 +295,4 @@ const btnCircle = {
   fontWeight: "bold"
 };
 
-export default MediaGallery;
+export default MediaGallery;

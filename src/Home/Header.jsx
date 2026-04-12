@@ -53,14 +53,29 @@ const Header = () => {
     return (
       <div style={loaderOverlay}>
         <div style={loaderContent}>
+
           <div className="loader-box" style={loaderBoxStyle}>
-            <span style={{ color: 'white', fontSize: '40px', fontWeight: 'bold' }}>P</span>
+            <img
+              src="/5.png"
+              alt="Logo"
+              style={{
+                width: "70%",
+                height: "70%",
+                objectFit: "contain"
+              }}
+            />
           </div>
-          <h2 style={loaderTitle}>PAREKH <span style={{ color: primaryColor }}>RAYON</span></h2>
+
+          <h2 style={loaderTitle}>
+            PAREKH <span style={{ color: primaryColor }}>RAYON</span>
+          </h2>
+
           <p style={loaderSubtitle}>RAIPUR • CG • INDIA</p>
+
           <div style={loadingBarStyle}>
             <div className="loading-progress" style={progressBarStyle}></div>
           </div>
+
         </div>
         <style>{`
           @keyframes pulse {
@@ -87,23 +102,43 @@ const Header = () => {
 
           {/* Logo */}
           <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+
+            {/* Logo Image */}
             <div style={{
-              width: '40px', height: '40px', borderRadius: '8px', background: primaryColor,
-              display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '10px'
+              width: '50px',
+              height: '50px',
+              borderRadius: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginRight: '10px'
             }}>
-              <span style={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>P</span>
+              <img
+                src="/5.png"
+                alt="Logo"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain'
+                }}
+              />
             </div>
+
+            {/* Text */}
             <div style={{ lineHeight: '1.2' }}>
               <div style={{ fontSize: '18px', fontWeight: '900', color: '#000' }}>
                 PAREKH <span style={{ color: primaryColor }}>RAYON</span>
               </div>
-              <div style={{ fontSize: '8px', color: '#888', letterSpacing: '1px' }}>RAIPUR, CG, INDIA</div>
+              <div style={{ fontSize: '8px', color: '#888', letterSpacing: '1px' }}>
+                RAIPUR, CG, INDIA
+              </div>
             </div>
+
           </Link>
 
           {/* Desktop Nav */}
           <nav className="d-none d-lg-flex" style={{ alignItems: 'center', gap: '25px' }}>
-            {['Home', 'About', 'Product', 'Blog', 'Contact'].map((item) => (
+            {['Home', 'About', 'Contact', 'Product'].map((item) => (
               <Link key={item} to={item === 'Home' ? '/' : `/${item.toLowerCase()}`} className="nav-item-link" style={menuLinkStyle}>{item}</Link>
             ))}
             <div
@@ -178,29 +213,29 @@ const Header = () => {
               <div style={{ fontWeight: '800', fontSize: '20px' }}>PAREKH <span style={{ color: primaryColor }}>RAYON</span></div>
               <i className="zmdi zmdi-close" style={{ fontSize: '26px', cursor: 'pointer', color: '#333' }} onClick={() => setMobileMenuOpen(false)}></i>
             </div>
-            
+
             {['Home', 'About', 'Product', 'Blog', 'Contact'].map((item) => (
               <Link key={item} to={item === 'Home' ? '/' : `/${item.toLowerCase()}`} style={mobileLinkStyle} onClick={() => setMobileMenuOpen(false)}>
                 {item}
               </Link>
             ))}
-            
+
             {/* Pages Dropdown for Mobile */}
             <div style={{ borderTop: '1px solid #eee', marginTop: '15px', paddingTop: '15px' }}>
-               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', ...mobileLinkStyle }} onClick={() => setMobilePagesOpen(!mobilePagesOpen)}>
-                 <span>PAGES</span>
-                 <i className={`zmdi ${mobilePagesOpen ? 'zmdi-chevron-up' : 'zmdi-chevron-down'}`}></i>
-               </div>
-               
-               {mobilePagesOpen && (
-                 <div style={{ paddingLeft: '15px', display: 'flex', flexDirection: 'column', gap: '5px', marginTop: '10px' }}>
-                   {pagesLinks.map((link, i) => (
-                     <Link key={i} to={link.path} style={mobileSubLinkStyle} onClick={() => setMobileMenuOpen(false)}>
-                       {link.name}
-                     </Link>
-                   ))}
-                 </div>
-               )}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', ...mobileLinkStyle }} onClick={() => setMobilePagesOpen(!mobilePagesOpen)}>
+                <span>PAGES</span>
+                <i className={`zmdi ${mobilePagesOpen ? 'zmdi-chevron-up' : 'zmdi-chevron-down'}`}></i>
+              </div>
+
+              {mobilePagesOpen && (
+                <div style={{ paddingLeft: '15px', display: 'flex', flexDirection: 'column', gap: '5px', marginTop: '10px' }}>
+                  {pagesLinks.map((link, i) => (
+                    <Link key={i} to={link.path} style={mobileSubLinkStyle} onClick={() => setMobileMenuOpen(false)}>
+                      {link.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </>
@@ -221,9 +256,9 @@ const loaderOverlay = {
 };
 const loaderContent = { display: 'flex', flexDirection: 'column', alignItems: 'center' };
 const loaderBoxStyle = {
-  width: '80px', height: '80px', background: '#717fe0', borderRadius: '15px',
-  display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '20px',
-  boxShadow: '0 10px 30px rgba(113, 127, 224, 0.4)'
+  width: '80px', height: '80px',
+  display: 'flex', justifyContent: 'center', alignItems: 'center',
+
 };
 const loaderTitle = { fontSize: '24px', fontWeight: '900', color: '#000', margin: '0', letterSpacing: '2px' };
 const loaderSubtitle = { fontSize: '12px', color: '#888', letterSpacing: '4px', marginTop: '5px' };
@@ -253,6 +288,8 @@ const chatInputStyle = { flex: 1, padding: '12px 15px', border: '1px solid #eaea
 const chatSendBtn = { width: '42px', height: '42px', borderRadius: '50%', background: '#717fe0', color: 'white', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: '0.3s' };
 
 const pagesLinks = [
+  { name: 'Media Gallery', path: '/mediagallery' },
+
   { name: 'Our Management', path: '/management' },
   { name: 'Trade Enquiry', path: '/TradeEnquiry' },
   { name: 'e-Quotation', path: '/quotation' },
@@ -260,9 +297,9 @@ const pagesLinks = [
   { name: 'Tender & Contract', path: '/TenderContract' },
   { name: 'Career Page', path: '/Career' },
   { name: 'Circular', path: '/Circular' },
+  { name: 'Blog', path: '/blog' },
   { name: 'Customer Review', path: '/review' },
   { name: 'Visit with Appointment', path: '/appointment' },
-  { name: 'Media Gallery', path: '/mediagallery' },
   { name: 'Our Textile Associates', path: '/associates' }
 ];
 
