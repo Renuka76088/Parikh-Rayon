@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { quotationApi } from "../utils/api";
 import { Loader2 } from "lucide-react";
 import "./Quotation.css";
+import SuccessModal from "../components/common/SuccessModal";
 
 const initialState = {
   traderName: "",
@@ -19,6 +20,7 @@ const Quotation = () => {
   const [formValues, setFormValues] = useState(initialState);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
+  const [showModal, setShowModal] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -45,7 +47,7 @@ const Quotation = () => {
       const response = await quotationApi.submit(data);
 
       if (response.data.success) {
-        setMessage({ type: 'success', text: 'Quotation request submitted successfully!' });
+        setShowModal(true);
         setFormValues(initialState);
       } else {
         setMessage({ type: 'error', text: response.data.message || 'Something went wrong.' });
@@ -75,7 +77,7 @@ const Quotation = () => {
                 <h4>Estimate Builder</h4>
               </div>
 
-              {message.text && (
+              {message.text && message.type === 'error' && (
                 <div className={`message-alert ${message.type}`}>
                   {message.text}
                 </div>
@@ -209,6 +211,12 @@ const Quotation = () => {
           </div>
         </div>
       </div>
+      <SuccessModal 
+        isOpen={showModal} 
+        onClose={() => setShowModal(false)} 
+        title="Quotation Requested"
+        message="Your estimate request has been received. Our sales team will prepare a formal quotation and contact you via email."
+      />
     </section>
   );
 };

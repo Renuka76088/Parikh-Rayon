@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { careerApi } from "../utils/api";
-import { Loader2, Briefcase, MapPin, Clock, Mail } from "lucide-react";
+import { Loader2, Briefcase, MapPin, Clock, Mail, CircleDollarSign } from "lucide-react";
 import "./Career.css";
 
 const Career = () => {
@@ -66,10 +66,16 @@ const Career = () => {
                     <MapPin size={14} className="m-r-6 cl6" />
                     <span className="stext-109 cl6" style={{ fontSize: '13px' }}>{job.location || "Remote/Office"}</span>
                   </div>
-                  <div className="flex-m">
+                  <div className="flex-m m-r-20">
                     <Clock size={14} className="m-r-6 cl6" />
-                    <span className="stext-109 cl6" style={{ fontSize: '13px' }}>{job.experience || "Freshers Welcome"}</span>
+                    <span className="stext-109 cl6" style={{ fontSize: '13px' }}>{job.experience || "Freshers"}</span>
                   </div>
+                  {job.salary && (
+                    <div className="flex-m">
+                      <CircleDollarSign size={14} className="m-r-6 cl6" />
+                      <span className="stext-109 cl6" style={{ fontSize: '13px' }}>{job.salary}</span>
+                    </div>
+                  )}
                 </div>
 
                 <p className="stext-102 cl6 p-b-25" style={{ fontSize: '14px', lineHeight: '1.6', height: '65px', overflow: 'hidden' }}>
@@ -77,9 +83,11 @@ const Career = () => {
                 </p>
 
                 <a 
-                  href={`mailto:${job.email || "hr@parekhrayon.com"}?subject=Application for ${job.title}`}
+                  href={`mailto:${job.contactEmail || job.email || "hr@parekhrayon.com"}?subject=${encodeURIComponent(`Application for ${job.title}`)}&body=${encodeURIComponent(
+                    `Hello,\n\nI would like to apply for the position of ${job.title} at Parikh Rayon.\n\nPlease find my details below:\n- Position: ${job.title}\n- Location: ${job.location || 'N/A'}\n\nMy Resume Link/Details: [Please insert your details here]\n\nThank you.`
+                  )}`}
                   className="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04" 
-                  style={{ width: '100%', borderRadius: '8px', height: '45px' }}
+                  style={{ width: '100%', borderRadius: '8px', height: '45px', textDecoration: 'none' }}
                 >
                   Apply Now
                 </a>

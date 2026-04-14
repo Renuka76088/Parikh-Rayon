@@ -93,10 +93,6 @@ const Review = () => {
           ))}
         </div>
 
-        <div className="review-cta">
-          <h4>Satisfied with our Rayon Quality?</h4>
-          <button onClick={() => setIsModalOpen(true)}>SHARE YOUR FEEDBACK</button>
-        </div>
       </div>
 
       {isModalOpen && (

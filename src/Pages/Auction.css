@@ -130,6 +130,36 @@
   transform: translateY(-1px);
 }
 
+.preview-button-auction {
+  flex: 1;
+  padding: 18px 0;
+  border: 1px solid #717fe0;
+  border-radius: 999px;
+  background: transparent;
+  color: #717fe0;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-button-auction:hover {
+  background: #f0f2ff;
+  border-color: #4f5ce3;
+  color: #4f5ce3;
+}
+
+.form-actions-flex {
+  margin-top: 10px;
+}
+
+.submit-button {
+  flex: 2;
+}
+
 .terms-link {
   text-align: center;
   margin-top: 24px;

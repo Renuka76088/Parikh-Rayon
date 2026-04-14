@@ -82,7 +82,7 @@ const Products = () => {
             name: p.title,
             category: p.category,
             image: `${IMAGE_BASE_URL}/${p.image}`,
-            type: "" 
+            type: ""
           }));
           setProducts(dynamicProducts);
           const uniqueCats = [...new Set(dynamicProducts.map(p => p.category))];
@@ -120,7 +120,7 @@ const Products = () => {
   return (
     <>
       <section className="bg0 p-t-100 p-b-140" style={{ marginTop: "50px", overflowX: 'hidden' }}>
-        
+
         {/* CSS INJECTION: Exactly matching the uploaded pixel copy */}
         <style>
           {`
@@ -198,14 +198,7 @@ const Products = () => {
             </div>
 
             <div className="flex-w flex-c-m m-tb-10">
-              <div
-                className="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4"
-                onClick={() => setShowFilter(!showFilter)}
-              >
-                <i className={`icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list ${showFilter ? "dis-none" : ""}`}></i>
-                <i className={`icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close ${showFilter ? "" : "dis-none"}`}></i>
-                Filter
-              </div>
+
               <div
                 className="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4"
                 onClick={() => setShowSearch(!showSearch)}

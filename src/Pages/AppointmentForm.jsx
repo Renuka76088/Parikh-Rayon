@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { appointmentApi } from '../utils/api';
 import { Loader2 } from 'lucide-react';
 import './AppointmentForm.css';
+import SuccessModal from '../components/common/SuccessModal';
 
 const AppointmentForm = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +19,7 @@ const AppointmentForm = () => {
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
+  const [showModal, setShowModal] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
@@ -51,7 +53,7 @@ const AppointmentForm = () => {
       const response = await appointmentApi.submit(data);
 
       if (response.data.success) {
-        setMessage({ type: 'success', text: 'Appointment requested successfully!' });
+        setShowModal(true);
         setFormData({
           visitorName: '',
           businessName: '',
@@ -104,7 +106,7 @@ const AppointmentForm = () => {
             <form onSubmit={handleSubmit}>
               <h4 className="form-title">Request Appointment</h4>
 
-              {message.text && (
+              {message.text && message.type === 'error' && (
                 <div className={`message-alert ${message.type}`}>
                   {message.text}
                 </div>
@@ -215,6 +217,12 @@ const AppointmentForm = () => {
           </div>
         </div>
       </div>
+      <SuccessModal 
+        isOpen={showModal} 
+        onClose={() => setShowModal(false)} 
+        title="Appointment Requested"
+        message="Your consultation request has been submitted. We will review the documents and confirm your appointment time via email shortly."
+      />
     </section>
   );
 };

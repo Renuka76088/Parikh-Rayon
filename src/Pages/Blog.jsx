@@ -104,7 +104,7 @@ const Blog = () => {
     fetchBlogs();
   }, []);
 
-  const filteredBlogs = blogs.filter((blog) => 
+  const filteredBlogs = blogs.filter((blog) =>
     filter === "*" || blog.category === filter
   );
 
@@ -131,7 +131,7 @@ const Blog = () => {
           </p>
           <div className="author-box">
             <h5 className="author-name">HC Parekh</h5>
-            <p className="author-desc">Textile Manufacturers & Entrepreneurs • India</p>
+            <p className="author-desc">Textile Manufacturer & Entrepreneur • India</p>
           </div>
         </div>
 
@@ -194,17 +194,6 @@ const Blog = () => {
           })}
         </div>
 
-        {/* B2B Special Section */}
-        <div className="b2b-banner m-t-60">
-          <div className="b2b-content">
-            <span className="b2b-label">Corporate Solutions</span>
-            <h4>Scaling your Garment Business with Parekh Associates</h4>
-            <p>Our multi-location supply chain ensures zero-delay delivery across INDIA.</p>
-          </div>
-          <button className="btn-download">
-            Download Guide <i className="fas fa-download m-l-10"></i>
-          </button>
-        </div>
 
         {/* Pagination placeholder */}
         <div className="pagination-wrapper p-t-60">

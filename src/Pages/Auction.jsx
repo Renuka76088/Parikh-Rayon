@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { auctionApi } from "../utils/api";
-import { Loader2 } from "lucide-react";
+import { Loader2, Eye } from "lucide-react";
 import "./Auction.css";
+import SuccessModal from "../components/common/SuccessModal";
+import PreviewModal from "../components/common/PreviewModal";
 
 const Auction = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +20,8 @@ const Auction = () => {
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
@@ -30,14 +34,25 @@ const Auction = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handlePreview = (e) => {
     e.preventDefault();
+    if (!formData.agree) {
+      alert("Please confirm that all provided details are legally valid.");
+      return;
+    }
+    setShowPreview(true);
+  };
+
+  const handleSubmit = async (e) => {
+    if (e) e.preventDefault();
+    
     if (!formData.agree) {
       alert("Please confirm that all provided details are legally valid.");
       return;
     }
 
     setLoading(true);
+    setShowPreview(false);
     setMessage({ type: '', text: '' });
 
     try {
@@ -57,7 +72,7 @@ const Auction = () => {
       const response = await auctionApi.submit(data);
 
       if (response.data.success) {
-        setMessage({ type: 'success', text: 'Auction registration submitted successfully!' });
+        setShowSuccess(true);
         setFormData({
           participantName: "",
           businessName: "",
@@ -97,7 +112,7 @@ const Auction = () => {
           <form className="auction-form" onSubmit={handleSubmit}>
             <h4>Participant Details</h4>
 
-            {message.text && (
+            {message.text && message.type === 'error' && (
               <div className={`message-alert ${message.type}`}>
                 {message.text}
               </div>
@@ -199,9 +214,14 @@ const Auction = () => {
               </label>
             </div>
 
-            <button type="submit" className="submit-button" disabled={loading}>
-              {loading ? <Loader2 className="animate-spin" /> : "REGISTER FOR AUCTION"}
-            </button>
+            <div className="form-actions-flex" style={{ display: 'flex', gap: '15px' }}>
+              <button type="button" className="preview-button-auction" onClick={handlePreview}>
+                <Eye size={18} className="m-r-8" /> Preview
+              </button>
+              <button type="submit" className="submit-button" disabled={loading}>
+                {loading ? <Loader2 className="animate-spin" /> : "REGISTER FOR AUCTION"}
+              </button>
+            </div>
             
             <div className="form-footer-link" style={{ textAlign: 'center', marginTop: '10px' }}>
               <a href="mailto:services@parekhrayon.com">services@parekhrayon.com</a>
@@ -213,6 +233,22 @@ const Auction = () => {
           </form>
         </div>
       </div>
+
+      <PreviewModal 
+        isOpen={showPreview} 
+        onClose={() => setShowPreview(false)} 
+        data={formData} 
+        title="Auction Registration Preview"
+        onConfirm={handleSubmit}
+        loading={loading}
+      />
+
+      <SuccessModal 
+        isOpen={showSuccess} 
+        onClose={() => setShowSuccess(false)} 
+        title="Registration Successful"
+        message="Thank you for registering for the e-Auction. Your details have been submitted and our team will contact you once the auction is published."
+      />
     </section>
   );
 };

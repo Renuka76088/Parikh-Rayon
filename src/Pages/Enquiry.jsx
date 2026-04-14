@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { tradeEnquiryApi } from "../utils/api";
 import { Loader2 } from "lucide-react";
 import "./Enquiry.css";
+import SuccessModal from "../components/common/SuccessModal";
+import PreviewModal from "../components/common/PreviewModal";
 
 const Enquiry = () => {
   const [formData, setFormData] = useState({
@@ -19,6 +21,8 @@ const Enquiry = () => {
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
+  const [showModal, setShowModal] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
@@ -59,7 +63,7 @@ const Enquiry = () => {
       const response = await tradeEnquiryApi.submit(data);
 
       if (response.data.success) {
-        setMessage({ type: 'success', text: 'Application submitted successfully!' });
+        setShowModal(true);
         setFormData({
           traderName: "",
           businessName: "",
@@ -84,7 +88,11 @@ const Enquiry = () => {
   };
 
   const handlePreview = () => {
-    alert("Preview functionality not implemented yet.");
+    if (!formData.agree) {
+      alert("Please agree to the undertaking.");
+      return;
+    }
+    setShowPreview(true);
   };
 
   return (
@@ -114,7 +122,7 @@ const Enquiry = () => {
             <form className="enquiry-form" onSubmit={handleSubmit}>
               <h4>Apply for Membership</h4>
 
-              {message.text && (
+              {message.text && message.type === 'error' && (
                 <div className={`message-alert ${message.type}`}>
                   {message.text}
                 </div>
@@ -243,6 +251,21 @@ const Enquiry = () => {
           </div>
         </div>
       </div>
+      <PreviewModal 
+        isOpen={showPreview} 
+        onClose={() => setShowPreview(false)} 
+        data={formData} 
+        title="Application Preview"
+        onConfirm={handleSubmit}
+        loading={loading}
+      />
+
+      <SuccessModal 
+        isOpen={showModal} 
+        onClose={() => setShowModal(false)} 
+        title="Enquiry Submitted"
+        message="Thank you for your interest in the Parekh Textile Network. Our team will review your application and get back to you shortly."
+      />
     </section>
   );
 };
