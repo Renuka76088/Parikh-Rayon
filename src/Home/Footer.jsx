@@ -79,7 +79,7 @@ const Footer = () => {
             </h4>
 
             <p className="text-muted mb-3">
-              HC Parekh & Associates, Industrial Area, RAIPUR, CG, India 452015.
+              HC Parekh & Associates, RAIPUR, CG, India.
               <br />
               <strong>Call:</strong> (+91) 6353778329
             </p>
