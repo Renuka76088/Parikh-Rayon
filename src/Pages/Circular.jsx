@@ -7,7 +7,7 @@ const Circular = () => {
       <div className="circular-container">
         <div className="circular-header">
           <h3>OFFICIAL CIRCULARS</h3>
-          <p>Latest updates from Parekh Textile & Rayon Division</p>
+          <p>Latest updates from Parekh Rayon Division</p>
           <div className="circular-line" />
         </div>
 

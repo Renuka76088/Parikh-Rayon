@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 const slides = [
   {
     image: "https://img.freepik.com/premium-photo/natural-fabric-linen-white-texture-design-sackcloth-textured-backdrop-canvas-background-chinese-new-year-festival-red-valentines-red-satin-fabric-background_43429-5630.jpg?w=1060",
-    subtitle: "PAREKH TEXTILE",
+    subtitle: "PAREKH RAYON",
     title: "Premium Rayon Collection",
     btn: "Explore Fabrics",
   },

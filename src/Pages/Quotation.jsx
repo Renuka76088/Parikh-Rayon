@@ -67,14 +67,14 @@ const Quotation = () => {
           <div className="quotation-intro">
             <h4>e-Quotation Guidelines</h4>
             <p>
-              Parekh Textile offers a transparent <strong>Quotation Builder</strong> for our B2B partners. Please provide your business details and requirements to generate an official estimate.
+              Parekh Rayon offers a transparent <strong>Quotation</strong> for our B2B partners. Please provide your business details and requirements to generate an official estimate.
             </p>
           </div>
 
           <div className="quotation-form-card">
             <form className="quotation-form" onSubmit={handleSubmit}>
               <div className="quotation-form-header">
-                <h4>Estimate Builder</h4>
+                <h4>Quotation</h4>
               </div>
 
               {message.text && message.type === 'error' && (
