@@ -24,7 +24,7 @@ const AboutPage = () => {
               <h3>ABOUT PAREKH RAYON</h3>
 
               <p>
-                Parekh Rayon is the trusted Manufacturers & Supplier of the high
+                Parekh Rayon is the trusted Manufacturer & Supplier of the high
                 standard quality of the Rayon Products, from lower range to higher
                 range with different TC at reasonable and low price range with best
                 and premium quality with Quality Assurance and Quality Seal.

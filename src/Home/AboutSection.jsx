@@ -17,7 +17,7 @@ const AboutSection = () => {
                 About Parekh Rayon
               </h1>
               <p className="stext-113 cl6 p-b-20" style={{ fontSize: '18px', lineHeight: '1.8' }}>
-                Parekh Rayon is the trusted Manufacturers & Supplier of the high standard quality 
+                Parekh Rayon is the trusted Manufacturer & Supplier of the high standard quality 
                 of the Rayon Products, from lower range to higher range with different TC at 
                 reasonable and low price range with best and premium quality with Quality 
                 Assurance and Quality Seal.
