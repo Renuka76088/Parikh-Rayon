@@ -30,7 +30,7 @@ const Footer = () => {
                   <span className="text-white font-weight-bold h5 mr-1">
                     PAREKH
                   </span>
-                  <span className="text-primary font-weight-bold h5">
+                  <span className="text-[#717fe0] text-xl font-weight-bold ">
                     RAYON
                   </span>
                 </div>
@@ -108,7 +108,7 @@ const Footer = () => {
                 className="form-control mb-3 bg-transparent border-bottom border-secondary text-muted"
               />
 
-              <button className="btn btn-primary">
+              <button style={{ borderColor: "#717fe0", backgroundColor: "#717fe0", color: "white" }} className="btn w-full ">
                 Join Network
               </button>
             </form>
