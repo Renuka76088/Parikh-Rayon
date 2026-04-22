@@ -79,7 +79,7 @@ const Blog = () => {
             category: b.category || "Industry Insights",
             title: b.title,
             desc: b.content ? b.content.substring(0, 150) + "..." : "",
-            img: b.thumbnail ? `${IMAGE_BASE_URL}/${b.thumbnail}` : staticBlogData[0].img,
+            img: b.thumbnail ? (b.thumbnail.replace(/\\/g, '/')?.startsWith("http") ? b.thumbnail : `${IMAGE_BASE_URL}/${b.thumbnail.replace(/\\/g, '/')}`) : staticBlogData[0].img,
             date: new Date(b.date || b.createdAt).toLocaleDateString("en-US", {
               day: "numeric",
               month: "long",

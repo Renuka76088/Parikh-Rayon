@@ -81,7 +81,7 @@ const Products = () => {
             id: p._id,
             name: p.title,
             category: p.category,
-            image: `${IMAGE_BASE_URL}/${p.image}`,
+            image: p.image?.startsWith("http") ? p.image : `${IMAGE_BASE_URL}/${p.image}`,
             type: ""
           }));
           setProducts(dynamicProducts);

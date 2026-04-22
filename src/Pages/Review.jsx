@@ -8,7 +8,7 @@ const reviews = [
     name: "Arjun Kapoor",
     title: "Verified Wholesaler, Surat",
     rating: 5,
-    text: "The 14kg Rayon quality from Parekh Textile is truly unmatched. Our customers love the airy, lightweight feel and the premium shine that sets it apart.",
+    text: "The 14kg Rayon quality from Parekh Rayon is truly unmatched. Our customers love the airy, lightweight feel and the premium shine that sets it apart.",
     avatarBg: "#f2f2f2",
     avatarColor: "#717fe0",
     cardStyle: { borderTop: "5px solid #717fe0", background: "#ffffff" },

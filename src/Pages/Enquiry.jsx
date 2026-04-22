@@ -55,7 +55,7 @@ const Enquiry = () => {
       data.append("mobileNo", formData.mobile);
       data.append("email", formData.email);
       data.append("enquiryType", formData.purchaseType);
-      
+
       if (formData.gstCert) {
         data.append("gstCertificate", formData.gstCert);
       }
@@ -102,7 +102,7 @@ const Enquiry = () => {
           <div className="enquiry-info">
             <h4>Trade Enquiry</h4>
             <p>
-              Join the <strong>Parekh Textile Network</strong>. Becoming a member of the Chamber of Textile allows you to access premium sourcing, global trade insights, and industrial support.
+              Join the <strong>Parekh Rayon Network</strong>. Becoming a member of the Chamber of Textile allows you to access premium sourcing, global trade insights, and industrial support.
             </p>
             <div className="documents">
               <h5>Required Documents:</h5>
@@ -243,7 +243,7 @@ const Enquiry = () => {
                   {loading ? <Loader2 className="animate-spin" /> : "Submit Application"}
                 </button>
               </div>
-              
+
               <div className="form-footer-link">
                 <a href="mailto:trade-enquiry@parekhrayon.com">trade-enquiry@parekhrayon.com</a>
               </div>
@@ -251,20 +251,20 @@ const Enquiry = () => {
           </div>
         </div>
       </div>
-      <PreviewModal 
-        isOpen={showPreview} 
-        onClose={() => setShowPreview(false)} 
-        data={formData} 
+      <PreviewModal
+        isOpen={showPreview}
+        onClose={() => setShowPreview(false)}
+        data={formData}
         title="Application Preview"
         onConfirm={handleSubmit}
         loading={loading}
       />
 
-      <SuccessModal 
-        isOpen={showModal} 
-        onClose={() => setShowModal(false)} 
+      <SuccessModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
         title="Enquiry Submitted"
-        message="Thank you for your interest in the Parekh Textile Network. Our team will review your application and get back to you shortly."
+        message="Thank you for your interest in the Parekh Rayon Network. Our team will review your application and get back to you shortly."
       />
     </section>
   );

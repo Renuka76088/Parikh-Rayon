@@ -49,7 +49,7 @@ const MediaGallery = () => {
             id: m._id,
             category: m.category || "General",
             title: m.title,
-            image: `${IMAGE_BASE_URL}/${m.image.replace(/\\/g, '/')}`
+            image: m.image.replace(/\\/g, '/') && (m.image.startsWith("http") ? m.image : `${IMAGE_BASE_URL}/${m.image.replace(/\\/g, '/')}`)
           }));
           setMediaItems(dynamicMedia);
           const uniqueCats = [...new Set(dynamicMedia.map(m => m.category))];
@@ -295,4 +295,4 @@ const btnCircle = {
   fontWeight: "bold"
 };
 
-export default MediaGallery;
+export default MediaGallery;
