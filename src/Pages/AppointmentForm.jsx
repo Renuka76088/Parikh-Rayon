@@ -45,7 +45,7 @@ const AppointmentForm = () => {
       data.append("email", formData.email);
       data.append("proofType", formData.idType);
       data.append("reasonForVisit", formData.visitReason);
-      
+
       if (formData.proofFile) {
         data.append("proofFile", formData.proofFile);
       }
@@ -80,12 +80,12 @@ const AppointmentForm = () => {
     <section className="appointment-section">
       <div className="container">
         <div className="form-wrapper">
-          
+
           {/* Left Side - Info */}
           <div className="info-side">
             <h4 className="section-title">Book a Consultation</h4>
             <p className="section-desc">
-              Schedule a meeting with our textile experts to discuss bulk orders, 
+              Schedule a meeting with our textile experts to discuss bulk orders,
               custom fabric manufacturing, or design partnerships.
             </p>
 
@@ -94,10 +94,10 @@ const AppointmentForm = () => {
                 *Appointments must be booked at least 24 hours in advance for factory visits.
               </p>
             </div>
-            
+
             <div className="official-assistance">
-               <span>Official Assistance:</span>
-               <p><a href="mailto:appointment@parekhrayon.com" style={{color: '#fff'}}>appointment@parekhrayon.com</a></p>
+              <span>Official Assistance:</span>
+              <p><a href="mailto:appointment@parekhrayon.com" style={{ color: '#fff' }}>appointment@parekhrayon.com</a></p>
             </div>
           </div>
 
@@ -172,7 +172,7 @@ const AppointmentForm = () => {
               </div>
 
               <div className="input-group">
-                <label>Select ID Type for Proof (Roll-down)</label>
+                <label>Select ID Type for Proof</label>
                 <select
                   name="idType"
                   value={formData.idType}
@@ -209,7 +209,7 @@ const AppointmentForm = () => {
               <button type="submit" className="submit-btn" disabled={loading}>
                 {loading ? <Loader2 className="animate-spin" /> : "CONFIRM APPOINTMENT"}
               </button>
-              
+
               <div className="form-footer-link" style={{ textAlign: 'center', marginTop: '10px' }}>
                 <a href="mailto:appointment@parekhrayon.com">appointment@parekhrayon.com</a>
               </div>
@@ -217,9 +217,9 @@ const AppointmentForm = () => {
           </div>
         </div>
       </div>
-      <SuccessModal 
-        isOpen={showModal} 
-        onClose={() => setShowModal(false)} 
+      <SuccessModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
         title="Appointment Requested"
         message="Your consultation request has been submitted. We will review the documents and confirm your appointment time via email shortly."
       />
