@@ -7,6 +7,7 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [pagesDropdownOpen, setPagesDropdownOpen] = useState(false);
   const [mobilePagesOpen, setMobilePagesOpen] = useState(false);
+  const [socialVisible, setSocialVisible] = useState(true);
 
   // --- Chatbot States ---
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -166,7 +167,35 @@ const Header = () => {
       </header>
 
       {/* Floating Elements (Social, Chat, WhatsApp) */}
-      <div style={socialFloatContainer}>
+      <div style={{
+        ...socialFloatContainer,
+        left: socialVisible ? '0' : '-50px',
+        transition: 'all 0.3s ease-in-out'
+      }}>
+        {/* Toggle Tab */}
+        <div
+          onClick={() => setSocialVisible(!socialVisible)}
+          style={{
+            position: 'absolute',
+            right: '-20px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            background: 'white',
+            width: '20px',
+            height: '40px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: '0 8px 8px 0',
+            boxShadow: '2px 0 10px rgba(0,0,0,0.1)',
+            cursor: 'pointer',
+            fontSize: '18px',
+            color: '#333'
+          }}
+        >
+          <i className={`zmdi ${socialVisible ? 'zmdi-chevron-left' : 'zmdi-chevron-right'}`}></i>
+        </div>
+
         <a href="#" style={socialIconStyle}><i className="zmdi zmdi-facebook"></i></a>
         <a href="#" style={socialIconStyle}><i className="zmdi zmdi-instagram"></i></a>
         <a href="#" style={socialIconStyle}><i className="zmdi zmdi-linkedin"></i></a>
@@ -210,11 +239,16 @@ const Header = () => {
           <div style={mobileOverlay} onClick={() => setMobileMenuOpen(false)}></div>
           <div style={mobileSidebar}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
-              <div style={{ fontWeight: '800', fontSize: '20px' }}>PAREKH <span style={{ color: primaryColor }}>RAYON</span></div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <img src="/5.png" alt="Logo" style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
+                <div style={{ fontWeight: '800', fontSize: '20px', color: "#000" }}>
+                  PAREKH <span style={{ color: primaryColor }}>RAYON</span>
+                </div>
+              </div>
               <i className="zmdi zmdi-close" style={{ fontSize: '26px', cursor: 'pointer', color: '#333' }} onClick={() => setMobileMenuOpen(false)}></i>
             </div>
 
-            {['Home', 'About', 'Product', 'Blog', 'Contact'].map((item) => (
+            {['Home', 'About', 'Contact', 'Product'].map((item) => (
               <Link key={item} to={item === 'Home' ? '/' : `/${item.toLowerCase()}`} style={mobileLinkStyle} onClick={() => setMobileMenuOpen(false)}>
                 {item}
               </Link>

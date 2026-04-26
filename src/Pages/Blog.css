@@ -88,10 +88,10 @@
     grid-template-columns: repeat(3, 1fr);
   }
   
-  /* Make the first item (premium-card) span 2 columns */
+  /* Make the first item (premium-card) span 2 columns but stay balanced */
   .blog-grid .blog-card.premium-card {
     grid-column: span 2;
-    grid-row: span 2;
+    grid-row: span 1;
   }
 }
 
@@ -142,8 +142,14 @@
 
 /* Premium Card Details */
 .premium-card .blog-img-wrapper {
-  padding-top: 65%; /* Important for mobile */
-  height: 100%; /* For grid row spanning to work perfectly */
+  padding-top: 65%; /* Important for tablet */
+  height: 100%; 
+}
+
+@media (max-width: 767px) {
+  .premium-card .blog-img-wrapper {
+    padding-top: 100%; /* More vertical space on mobile to prevent text cut-off */
+  }
 }
 
 @media (min-width: 1024px) {
@@ -207,6 +213,17 @@
   margin-bottom: 30px; 
   line-height: 1.6;
   max-width: 85%;
+}
+
+@media (max-width: 767px) {
+  .overlay-title {
+    font-size: 22px;
+  }
+  .overlay-desc {
+    font-size: 14px;
+    max-width: 100%;
+    margin-bottom: 15px;
+  }
 }
 
 .read-more-link {

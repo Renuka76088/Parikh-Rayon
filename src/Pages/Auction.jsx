@@ -45,7 +45,7 @@ const Auction = () => {
 
   const handleSubmit = async (e) => {
     if (e) e.preventDefault();
-    
+
     if (!formData.agree) {
       alert("Please confirm that all provided details are legally valid.");
       return;
@@ -64,7 +64,7 @@ const Auction = () => {
       data.append("gstNo", formData.gstNumber);
       data.append("mobileNo", formData.mobile);
       data.append("email", formData.email);
-      
+
       if (formData.gstCert) {
         data.append("gstCertificate", formData.gstCert);
       }
@@ -194,11 +194,11 @@ const Auction = () => {
 
             <div className="form-group file-group">
               <label>Upload GST Certificate (PDF/JPG)</label>
-              <input 
-                type="file" 
-                name="gstCert" 
+              <input
+                type="file"
+                name="gstCert"
                 onChange={handleChange}
-                accept=".pdf,.jpg,.jpeg,.png" 
+                accept=".pdf,.jpg,.jpeg,.png"
               />
             </div>
 
@@ -222,30 +222,30 @@ const Auction = () => {
                 {loading ? <Loader2 className="animate-spin" /> : "REGISTER FOR AUCTION"}
               </button>
             </div>
-            
+
             <div className="form-footer-link" style={{ textAlign: 'center', marginTop: '10px' }}>
               <a href="mailto:services@parekhrayon.com">services@parekhrayon.com</a>
             </div>
 
-            <div className="terms-link">
+            {/* <div className="terms-link">
               <a href="#">View Participant Terms & Conditions</a>
-            </div>
+            </div> */}
           </form>
         </div>
       </div>
 
-      <PreviewModal 
-        isOpen={showPreview} 
-        onClose={() => setShowPreview(false)} 
-        data={formData} 
+      <PreviewModal
+        isOpen={showPreview}
+        onClose={() => setShowPreview(false)}
+        data={formData}
         title="Auction Registration Preview"
         onConfirm={handleSubmit}
         loading={loading}
       />
 
-      <SuccessModal 
-        isOpen={showSuccess} 
-        onClose={() => setShowSuccess(false)} 
+      <SuccessModal
+        isOpen={showSuccess}
+        onClose={() => setShowSuccess(false)}
         title="Registration Successful"
         message="Thank you for registering for the e-Auction. Your details have been submitted and our team will contact you once the auction is published."
       />
