@@ -3,7 +3,7 @@ import '../Pages/main.css'
 const AboutSection = () => {
   return (
     <section className="">
-      <div className="container">
+      <div className="container" style={{ marginBottom: "40px" }}>
         <div className="flex flex-wrap align-items-center justify-content-center py-10">
           <div className="col-md-6 col-lg-6 p-b-30">
             <div className="hov-img0 how-bor2">
