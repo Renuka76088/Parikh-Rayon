@@ -87,11 +87,11 @@
   .blog-grid {
     grid-template-columns: repeat(3, 1fr);
   }
-  
-  /* Make the first item (premium-card) span 2 columns but stay balanced */
+
   .blog-grid .blog-card.premium-card {
     grid-column: span 2;
     grid-row: span 1;
+    min-height: 450px !important;
   }
 }
 
@@ -101,17 +101,19 @@
   flex-direction: column;
   background: #fff;
   border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
   transition: var(--transition);
   height: 100%;
   overflow: hidden;
   position: relative;
-  border: 1px solid rgba(0,0,0,0.03);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  text-decoration: none;
+  color: inherit;
 }
 
 .blog-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
 }
 
 .blog-img-wrapper {
@@ -137,24 +139,27 @@
 
 /* Aspect Ratios to enforce consistent heights */
 .standard-card .blog-img-wrapper {
-  padding-top: 65%; /* Consistent 65% aspect ratio */
+  padding-top: 65%;
+  /* Consistent 65% aspect ratio */
 }
 
 /* Premium Card Details */
 .premium-card .blog-img-wrapper {
-  padding-top: 65%; /* Important for tablet */
-  height: 100%; 
+  padding-top: 65%;
+  /* Important for tablet */
+  height: 100%;
 }
 
 @media (max-width: 767px) {
   .premium-card .blog-img-wrapper {
-    padding-top: 100%; /* More vertical space on mobile to prevent text cut-off */
+    padding-top: 100%;
+    /* More vertical space on mobile to prevent text cut-off */
   }
 }
 
 @media (min-width: 1024px) {
   .premium-card .blog-img-wrapper {
-    padding-top: 0; 
+    padding-top: 0;
     height: 100%;
   }
 }
@@ -162,7 +167,7 @@
 .premium-card .blog-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.1) 100%);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -173,9 +178,10 @@
 
 @media (min-width: 1024px) {
   .premium-card .blog-overlay {
-    background: linear-gradient(to right, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0) 100%);
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0) 100%);
     padding: 60px;
-    justify-content: center; /* Better for wider aspect */
+    justify-content: center;
+    /* Better for wider aspect */
   }
 }
 
@@ -192,9 +198,9 @@
   letter-spacing: 1px;
 }
 
-.overlay-title { 
-  font-size: 32px; 
-  font-weight: 800; 
+.overlay-title {
+  font-size: 32px;
+  font-weight: 800;
   margin-bottom: 15px;
   line-height: 1.3;
   max-width: 90%;
@@ -207,10 +213,10 @@
   }
 }
 
-.overlay-desc { 
-  font-size: 17px; 
-  opacity: 0.9; 
-  margin-bottom: 30px; 
+.overlay-desc {
+  font-size: 17px;
+  opacity: 0.9;
+  margin-bottom: 30px;
   line-height: 1.6;
   max-width: 85%;
 }
@@ -219,6 +225,7 @@
   .overlay-title {
     font-size: 22px;
   }
+
   .overlay-desc {
     font-size: 14px;
     max-width: 100%;
@@ -248,7 +255,7 @@
   padding: 30px 25px;
   display: flex;
   flex-direction: column;
-  flex-grow: 1; 
+  flex-grow: 1;
 }
 
 .blog-meta {
@@ -270,20 +277,20 @@
   color: #999;
 }
 
-.blog-card-title { 
-  font-size: 22px; 
-  font-weight: 700; 
-  margin: 0 0 15px 0; 
+.blog-card-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 15px 0;
   color: var(--dark-color);
   line-height: 1.4;
 }
 
-.blog-card-desc { 
-  color: var(--text-grey); 
-  font-size: 15px; 
-  line-height: 1.6; 
+.blog-card-desc {
+  color: var(--text-grey);
+  font-size: 15px;
+  line-height: 1.6;
   margin-bottom: 20px;
-  flex-grow: 1; 
+  flex-grow: 1;
 }
 
 .explore-link {
@@ -314,8 +321,8 @@
   gap: 12px;
 }
 
-.explore-link:hover::after { 
-  width: 100%; 
+.explore-link:hover::after {
+  width: 100%;
 }
 
 /* B2B Banner - Modern Concept */
@@ -328,7 +335,7 @@
   border-radius: 24px;
   color: white;
   margin-top: 60px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
   position: relative;
   overflow: hidden;
 }
@@ -340,7 +347,7 @@
   right: -10%;
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, rgba(113,127,224,0.4) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(113, 127, 224, 0.4) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -350,25 +357,25 @@
   z-index: 1;
 }
 
-.b2b-label { 
-  color: #a7b3ff; 
-  font-weight: 700; 
-  font-size: 13px; 
-  letter-spacing: 2px; 
+.b2b-label {
+  color: #a7b3ff;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 2px;
   text-transform: uppercase;
   display: block;
   margin-bottom: 15px;
 }
 
-.b2b-banner h4 { 
-  font-size: 28px; 
+.b2b-banner h4 {
+  font-size: 28px;
   font-weight: 800;
-  margin: 0 0 10px 0; 
+  margin: 0 0 10px 0;
 }
 
-.b2b-banner p { 
-  opacity: 0.8; 
-  font-weight: 400; 
+.b2b-banner p {
+  opacity: 0.8;
+  font-weight: 400;
   font-size: 16px;
   margin: 0;
   max-width: 500px;
@@ -403,7 +410,8 @@
   gap: 12px;
 }
 
-.page-num, .page-arrow {
+.page-num,
+.page-arrow {
   height: 48px;
   padding: 0 20px;
   border-radius: 12px;
@@ -430,19 +438,37 @@
   box-shadow: 0 5px 15px rgba(113, 127, 224, 0.3);
 }
 
-.page-num:hover:not(.active), .page-arrow:hover {
+.page-num:hover:not(.active),
+.page-arrow:hover {
   background: #f5f5f5;
   border-color: #ccc;
   transform: translateY(-2px);
 }
 
 /* Helper Classes */
-.m-t-60 { margin-top: 60px; }
-.m-b-60 { margin-bottom: 60px; }
-.m-l-10 { margin-left: 10px; }
-.p-t-100 { padding-top: 100px; }
-.p-b-100 { padding-bottom: 100px; }
-.p-t-60 { padding-top: 60px; }
+.m-t-60 {
+  margin-top: 60px;
+}
+
+.m-b-60 {
+  margin-bottom: 60px;
+}
+
+.m-l-10 {
+  margin-left: 10px;
+}
+
+.p-t-100 {
+  padding-top: 100px;
+}
+
+.p-b-100 {
+  padding-bottom: 100px;
+}
+
+.p-t-60 {
+  padding-top: 60px;
+}
 
 /* --- Responsiveness --- */
 @media (max-width: 991px) {
@@ -452,15 +478,15 @@
     text-align: center;
     gap: 30px;
   }
-  
+
   .b2b-banner h4 {
     font-size: 24px;
   }
-  
+
   .b2b-banner p {
     margin: 0 auto;
   }
-  
+
   .b2b-banner::before {
     top: -20%;
     right: 50%;
@@ -477,12 +503,12 @@
     font-size: 15px;
     padding: 0 15px;
   }
-  
+
   .overlay-title {
     font-size: 26px;
     max-width: 100%;
   }
-  
+
   .btn-download {
     width: 100%;
   }

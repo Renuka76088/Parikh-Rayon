@@ -1,1 +1,165 @@
 @import "tailwindcss";
+
+/* Global Rich Text Editor Format Reset */
+.rte-content, .rte-content *,
+.ql-editor, .ql-editor *,
+.blog-detail-content, .blog-detail-content * {
+  max-width: 100% !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  word-break: normal !important;
+  hyphens: none !important;
+  white-space: pre-wrap !important;
+}
+
+
+.rte-content img, .ql-editor img, .blog-detail-content img,
+.rte-content iframe, .ql-editor iframe, .blog-detail-content iframe,
+.rte-content video, .ql-editor video, .blog-detail-content video {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
+  margin: 10px auto;
+}
+
+.rte-content, .ql-editor, .blog-detail-content {
+  counter-reset: list-0 list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+  white-space: pre-wrap !important;
+}
+
+.rte-content p, .ql-editor p, .blog-detail-content p,
+.rte-content ol, .ql-editor ol, .blog-detail-content ol,
+.rte-content ul, .ql-editor ul, .blog-detail-content ul,
+.rte-content pre, .ql-editor pre, .blog-detail-content pre,
+.rte-content blockquote, .ql-editor blockquote, .blog-detail-content blockquote,
+.rte-content h1, .ql-editor h1, .blog-detail-content h1,
+.rte-content h2, .ql-editor h2, .blog-detail-content h2,
+.rte-content h3, .ql-editor h3, .blog-detail-content h3,
+.rte-content h4, .ql-editor h4, .blog-detail-content h4,
+.rte-content h5, .ql-editor h5, .blog-detail-content h5,
+.rte-content h6, .ql-editor h6, .blog-detail-content h6 {
+  margin-top: 0 !important;
+  margin-bottom: 12px !important;
+}
+
+.rte-content ol, .rte-content ul,
+.ql-editor ol, .ql-editor ul,
+.blog-detail-content ol, .blog-detail-content ul {
+  padding-left: 1.5em !important;
+  margin-bottom: 15px !important;
+}
+
+.rte-content li, .ql-editor li, .blog-detail-content li {
+  list-style-type: none !important; /* Reset standard bullets since Quill uses ::before */
+  padding-left: 1.5em !important;
+  position: relative !important;
+  margin-bottom: 6px !important;
+  line-height: 1.6 !important;
+}
+
+.rte-content li::before,
+.ql-editor li::before,
+.blog-detail-content li::before {
+  display: inline-block !important;
+  margin-left: -1.5em !important;
+  margin-right: 0.3em !important;
+  text-align: right !important;
+  white-space: nowrap !important;
+  width: 1.2em !important;
+  font-weight: normal !important;
+}
+
+/* Bullet list custom markers */
+.rte-content li[data-list=bullet]::before,
+.ql-editor li[data-list=bullet]::before,
+.blog-detail-content li[data-list=bullet]::before {
+  content: '\2022' !important;
+  font-size: 1.2em !important;
+  line-height: 1 !important;
+  color: #333 !important;
+}
+
+/* Task list custom markers */
+.rte-content li[data-list=checked]::before,
+.ql-editor li[data-list=checked]::before,
+.blog-detail-content li[data-list=checked]::before {
+  content: '\2611' !important;
+  color: #717fe0 !important;
+}
+
+.rte-content li[data-list=unchecked]::before,
+.ql-editor li[data-list=unchecked]::before,
+.blog-detail-content li[data-list=unchecked]::before {
+  content: '\2610' !important;
+  color: #777 !important;
+}
+
+/* Ordered list counters */
+.rte-content li[data-list=ordered], .ql-editor li[data-list=ordered], .blog-detail-content li[data-list=ordered] {
+  counter-increment: list-0;
+}
+
+.rte-content li[data-list=ordered]::before,
+.ql-editor li[data-list=ordered]::before,
+.blog-detail-content li[data-list=ordered]::before {
+  content: counter(list-0, decimal) '. ' !important;
+}
+
+.rte-content li[data-list=ordered].ql-indent-1, .ql-editor li[data-list=ordered].ql-indent-1, .blog-detail-content li[data-list=ordered].ql-indent-1 {
+  counter-increment: list-1;
+}
+
+.rte-content li[data-list=ordered].ql-indent-1::before,
+.ql-editor li[data-list=ordered].ql-indent-1::before,
+.blog-detail-content li[data-list=ordered].ql-indent-1::before {
+  content: counter(list-1, lower-alpha) '. ' !important;
+}
+
+.rte-content li[data-list=ordered].ql-indent-2, .ql-editor li[data-list=ordered].ql-indent-2, .blog-detail-content li[data-list=ordered].ql-indent-2 {
+  counter-increment: list-2;
+}
+
+.rte-content li[data-list=ordered].ql-indent-2::before,
+.ql-editor li[data-list=ordered].ql-indent-2::before,
+.blog-detail-content li[data-list=ordered].ql-indent-2::before {
+  content: counter(list-2, lower-roman) '. ' !important;
+}
+
+.rte-content li[data-list=ordered].ql-indent-3, .ql-editor li[data-list=ordered].ql-indent-3, .blog-detail-content li[data-list=ordered].ql-indent-3 {
+  counter-increment: list-3;
+}
+
+.rte-content li[data-list=ordered].ql-indent-3::before,
+.ql-editor li[data-list=ordered].ql-indent-3::before,
+.blog-detail-content li[data-list=ordered].ql-indent-3::before {
+  content: counter(list-3, decimal) '. ' !important;
+}
+
+/* Indentations alignment styles */
+.rte-content .ql-indent-1:not(.ql-direction-rtl), .ql-editor .ql-indent-1:not(.ql-direction-rtl), .blog-detail-content .ql-indent-1:not(.ql-direction-rtl) { padding-left: 3em !important; }
+.rte-content li.ql-indent-1:not(.ql-direction-rtl), .ql-editor li.ql-indent-1:not(.ql-direction-rtl), .blog-detail-content li.ql-indent-1:not(.ql-direction-rtl) { padding-left: 4.5em !important; }
+.rte-content .ql-indent-2:not(.ql-direction-rtl), .ql-editor .ql-indent-2:not(.ql-direction-rtl), .blog-detail-content .ql-indent-2:not(.ql-direction-rtl) { padding-left: 6em !important; }
+.rte-content li.ql-indent-2:not(.ql-direction-rtl), .ql-editor li.ql-indent-2:not(.ql-direction-rtl), .blog-detail-content li.ql-indent-2:not(.ql-direction-rtl) { padding-left: 7.5em !important; }
+.rte-content .ql-indent-3:not(.ql-direction-rtl), .ql-editor .ql-indent-3:not(.ql-direction-rtl), .blog-detail-content .ql-indent-3:not(.ql-direction-rtl) { padding-left: 9em !important; }
+.rte-content li.ql-indent-3:not(.ql-direction-rtl), .ql-editor li.ql-indent-3:not(.ql-direction-rtl), .blog-detail-content li.ql-indent-3:not(.ql-direction-rtl) { padding-left: 10.5em !important; }
+.rte-content .ql-indent-4:not(.ql-direction-rtl), .ql-editor .ql-indent-4:not(.ql-direction-rtl), .blog-detail-content .ql-indent-4:not(.ql-direction-rtl) { padding-left: 12em !important; }
+.rte-content li.ql-indent-4:not(.ql-direction-rtl), .ql-editor li.ql-indent-4:not(.ql-direction-rtl), .blog-detail-content li.ql-indent-4:not(.ql-direction-rtl) { padding-left: 13.5em !important; }
+.rte-content .ql-indent-5:not(.ql-direction-rtl), .ql-editor .ql-indent-5:not(.ql-direction-rtl), .blog-detail-content .ql-indent-5:not(.ql-direction-rtl) { padding-left: 15em !important; }
+.rte-content li.ql-indent-5:not(.ql-direction-rtl), .ql-editor li.ql-indent-5:not(.ql-direction-rtl), .blog-detail-content li.ql-indent-5:not(.ql-direction-rtl) { padding-left: 16.5em !important; }
+
+/* Alignments */
+.rte-content .ql-align-center, .ql-editor .ql-align-center { text-align: center !important; }
+.rte-content .ql-align-justify, .ql-editor .ql-align-justify { text-align: justify !important; }
+.rte-content .ql-align-right, .ql-editor .ql-align-right { text-align: right !important; }
+
+.rte-content table, .ql-editor table {
+  width: 100% !important;
+  max-width: 100% !important;
+  table-layout: fixed;
+  word-wrap: break-word;
+}
+
+.rte-content td, .rte-content th,
+.ql-editor td, .ql-editor th {
+  word-break: break-word !important;
+}

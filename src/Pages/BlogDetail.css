@@ -1,0 +1,324 @@
+.blog-detail-section {
+    background-color: #fafafa;
+    min-height: 100vh;
+}
+
+.blog-detail-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 60px 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow-x: hidden;
+}
+
+
+.blog-detail-header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.blog-detail-category {
+    background: #717fe0;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.blog-detail-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #333;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.blog-detail-meta {
+    font-size: 15px;
+    color: #777;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.blog-detail-meta span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.blog-detail-meta i,
+.blog-detail-meta svg {
+    color: #717fe0;
+}
+
+
+.blog-detail-image-wrapper {
+    max-width: 520px;
+    margin: 0 auto 35px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+.blog-detail-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.blog-detail-content {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #444;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+    white-space: pre-wrap !important;
+}
+
+.blog-detail-content * {
+    max-width: 100% !important;
+    height: auto !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+    white-space: pre-wrap !important;
+}
+
+.blog-detail-content img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin: 30px 0;
+    object-fit: cover;
+}
+
+
+.blog-detail-content p {
+    margin-bottom: 20px;
+}
+
+.blog-detail-content h2,
+.blog-detail-content h3 {
+    color: #333;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.back-to-blogs {
+    display: inline-flex;
+    align-items: center;
+    color: #717fe0;
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+}
+
+.back-to-blogs:hover {
+    color: #333;
+    transform: translateX(-5px);
+}
+
+.back-to-blogs i {
+    margin-right: 8px;
+}
+
+@media (max-width: 768px) {
+    .blog-detail-container {
+        padding: 20px;
+        border-radius: 0;
+    }
+
+    .blog-detail-title {
+        font-size: 28px;
+    }
+}
+
+/* Rich Text Editor HTML Styling Rules for Blog Content */
+.blog-detail-content {
+    counter-reset: list-0 list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+}
+
+.blog-detail-content p,
+.blog-detail-content ol,
+.blog-detail-content ul,
+.blog-detail-content pre,
+.blog-detail-content blockquote,
+.blog-detail-content h1,
+.blog-detail-content h2,
+.blog-detail-content h3,
+.blog-detail-content h4,
+.blog-detail-content h5,
+.blog-detail-content h6 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.blog-detail-content ol,
+.blog-detail-content ul {
+    padding-left: 1.5em !important;
+    margin-bottom: 15px !important;
+}
+
+.blog-detail-content li {
+    list-style-type: none !important; /* Reset standard bullets since Quill uses ::before */
+    padding-left: 1.5em !important;
+    position: relative !important;
+    margin-bottom: 8px !important;
+    line-height: 1.8 !important;
+}
+
+.blog-detail-content li::before {
+    display: inline-block !important;
+    margin-left: -1.5em !important;
+    margin-right: 0.3em !important;
+    text-align: right !important;
+    white-space: nowrap !important;
+    width: 1.2em !important;
+    font-weight: normal !important;
+}
+
+/* Bullet list custom markers */
+.blog-detail-content li[data-list=bullet]::before {
+    content: '\2022' !important;
+    font-size: 1.2em !important;
+    line-height: 1 !important;
+    color: #333 !important;
+}
+
+/* Task list custom markers */
+.blog-detail-content li[data-list=checked]::before {
+    content: '\2611' !important;
+    color: #717fe0 !important;
+}
+
+.blog-detail-content li[data-list=unchecked]::before {
+    content: '\2610' !important;
+    color: #777 !important;
+}
+
+/* Ordered list counters */
+.blog-detail-content li[data-list=ordered] {
+    counter-increment: list-0;
+}
+
+.blog-detail-content li[data-list=ordered]::before {
+    content: counter(list-0, decimal) '. ' !important;
+}
+
+.blog-detail-content li[data-list=ordered].ql-indent-1 {
+    counter-increment: list-1;
+}
+
+.blog-detail-content li[data-list=ordered].ql-indent-1::before {
+    content: counter(list-1, lower-alpha) '. ' !important;
+}
+
+.blog-detail-content li[data-list=ordered].ql-indent-2 {
+    counter-increment: list-2;
+}
+
+.blog-detail-content li[data-list=ordered].ql-indent-2::before {
+    content: counter(list-2, lower-roman) '. ' !important;
+}
+
+.blog-detail-content li[data-list=ordered].ql-indent-3 {
+    counter-increment: list-3;
+}
+
+.blog-detail-content li[data-list=ordered].ql-indent-3::before {
+    content: counter(list-3, decimal) '. ' !important;
+}
+
+.blog-detail-content li[data-list=ordered].ql-indent-4 {
+    counter-increment: list-4;
+}
+
+.blog-detail-content li[data-list=ordered].ql-indent-4::before {
+    content: counter(list-4, lower-alpha) '. ' !important;
+}
+
+.blog-detail-content li[data-list=ordered].ql-indent-5 {
+    counter-increment: list-5;
+}
+
+.blog-detail-content li[data-list=ordered].ql-indent-5::before {
+    content: counter(list-5, lower-roman) '. ' !important;
+}
+
+/* Indentations alignment styles */
+.blog-detail-content .ql-indent-1:not(.ql-direction-rtl) { padding-left: 3em !important; }
+.blog-detail-content li.ql-indent-1:not(.ql-direction-rtl) { padding-left: 4.5em !important; }
+.blog-detail-content .ql-indent-2:not(.ql-direction-rtl) { padding-left: 6em !important; }
+.blog-detail-content li.ql-indent-2:not(.ql-direction-rtl) { padding-left: 7.5em !important; }
+.blog-detail-content .ql-indent-3:not(.ql-direction-rtl) { padding-left: 9em !important; }
+.blog-detail-content li.ql-indent-3:not(.ql-direction-rtl) { padding-left: 10.5em !important; }
+.blog-detail-content .ql-indent-4:not(.ql-direction-rtl) { padding-left: 12em !important; }
+.blog-detail-content li.ql-indent-4:not(.ql-direction-rtl) { padding-left: 13.5em !important; }
+.blog-detail-content .ql-indent-5:not(.ql-direction-rtl) { padding-left: 15em !important; }
+.blog-detail-content li.ql-indent-5:not(.ql-direction-rtl) { padding-left: 16.5em !important; }
+
+/* Alignments */
+.blog-detail-content .ql-align-center { text-align: center !important; }
+.blog-detail-content .ql-align-justify { text-align: justify !important; }
+.blog-detail-content .ql-align-right { text-align: right !important; }
+
+.blog-detail-content strong {
+    font-weight: bold !important;
+}
+
+.blog-detail-content em {
+    font-style: italic !important;
+}
+
+.blog-detail-content u {
+    text-decoration: underline !important;
+}
+
+.blog-detail-content h1,
+.blog-detail-content h2,
+.blog-detail-content h3,
+.blog-detail-content h4,
+.blog-detail-content h5,
+.blog-detail-content h6 {
+    color: #333 !important;
+    font-weight: 700 !important;
+    margin-top: 30px !important;
+    margin-bottom: 15px !important;
+    line-height: 1.4 !important;
+}
+
+.blog-detail-content h1 { font-size: 28px !important; }
+.blog-detail-content h2 { font-size: 24px !important; }
+.blog-detail-content h3 { font-size: 20px !important; }
+.blog-detail-content h4 { font-size: 18px !important; }
+
+.blog-detail-content blockquote {
+    border-left: 4px solid #717fe0 !important;
+    padding-left: 20px !important;
+    margin: 20px 0 !important;
+    font-style: italic !important;
+    color: #666 !important;
+}
+
+.blog-detail-content a {
+    color: #717fe0 !important;
+    text-decoration: underline !important;
+}
+
+.blog-detail-content a:hover {
+    color: #333 !important;
+}

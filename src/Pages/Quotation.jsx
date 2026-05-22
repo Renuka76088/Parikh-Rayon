@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { quotationApi } from "../utils/api";
+import React, { useState, useEffect } from "react";
+import { quotationApi, equotationHeaderApi, IMAGE_BASE_URL } from "../utils/api";
 import { Loader2 } from "lucide-react";
 import "./Quotation.css";
 import SuccessModal from "../components/common/SuccessModal";
@@ -21,6 +21,39 @@ const Quotation = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
   const [showModal, setShowModal] = useState(false);
+
+  const [quotations, setQuotations] = useState([]);
+  const [header, setHeader] = useState({ title: "e-Quotation Guidelines", description: "Parekh Rayon offers a transparent Quotation for our B2B partners. Please provide your business details and requirements to generate an official estimate." });
+  const [dataLoading, setDataLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchQuotationData = async () => {
+      try {
+        setDataLoading(true);
+        const [headerRes, quotationsRes] = await Promise.all([
+          equotationHeaderApi.get(formValues.siteId),
+          quotationApi.getAll(formValues.siteId)
+        ]);
+
+        if (headerRes.data?.success && headerRes.data?.data) {
+          setHeader({
+            title: headerRes.data.data.title || "e-Quotation Guidelines",
+            description: headerRes.data.data.description || "Parekh Rayon offers a transparent Quotation for our B2B partners..."
+          });
+        }
+        if (quotationsRes.data?.success && quotationsRes.data?.data) {
+          const activeQuotations = quotationsRes.data.data.filter(q => q.status === 'active');
+          setQuotations(activeQuotations);
+        }
+      } catch (error) {
+        console.error("Error fetching quotation data:", error);
+      } finally {
+        setDataLoading(false);
+      }
+    };
+    fetchQuotationData();
+  }, [formValues.siteId]);
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -65,10 +98,45 @@ const Quotation = () => {
       <div className="quotation-container">
         <div className="quotation-card">
           <div className="quotation-intro">
-            <h4>e-Quotation Guidelines</h4>
-            <p>
-              Parekh Rayon offers a transparent <strong>Quotation</strong> for our B2B partners. Please provide your business details and requirements to generate an official estimate.
-            </p>
+            <h4>{header.title}</h4>
+            <div
+              className="rte-content w-full max-w-full overflow-hidden text-[#555] text-[15px] leading-relaxed mt-3 [&>p]:mb-3 [&>img]:max-w-full [&>img]:h-auto [&>img]:mx-auto [&_table]:w-full [&_table]:max-w-full [&_td]:break-words [&_th]:break-words [&>ul]:pl-5 [&>ol]:pl-5"
+              style={{ overflowWrap: 'break-word', wordBreak: 'normal', hyphens: 'none' }}
+              dangerouslySetInnerHTML={{ __html: header.description ? header.description.replace(/&nbsp;/g, ' ') : '' }}
+            />
+            {dataLoading ? (
+              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '30px' }}>
+                <Loader2 className="animate-spin" size={32} color="#717fe0" />
+              </div>
+            ) : quotations.length > 0 && (
+              <div style={{ marginTop: '30px' }}>
+                <h4 style={{ marginBottom: '15px', color: '#222', fontSize: '18px', fontWeight: '800', textTransform: 'uppercase' }}>Active Quotations</h4>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                  {quotations.map(quotation => (
+                    <div key={quotation._id} style={{ background: '#fff', padding: '15px', borderRadius: '10px', border: '1px solid #eee', boxShadow: '0 2px 10px rgba(0,0,0,0.02)' }}>
+                      {quotation.image && (
+                        <img
+                          src={quotation.image.startsWith('http') ? quotation.image : `${IMAGE_BASE_URL}/${quotation.image.replace(/\\/g, '/')}`}
+                          alt={quotation.title}
+                          style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '6px', marginBottom: '10px' }}
+                        />
+                      )}
+                      <h5 style={{ fontSize: '16px', fontWeight: '800', marginBottom: '8px', color: '#222' }}>{quotation.title}</h5>
+                      <div
+                        className="rte-content w-full max-w-full overflow-hidden text-[#555] text-[13px] leading-relaxed mb-3 [&>p]:mb-2 [&>img]:max-w-full [&>img]:h-auto [&>img]:mx-auto [&_table]:w-full [&_table]:max-w-full [&_td]:break-words [&_th]:break-words [&>ul]:pl-5 [&>ol]:pl-5"
+                        style={{ overflowWrap: 'break-word', wordBreak: 'normal', hyphens: 'none' }}
+                        dangerouslySetInnerHTML={{ __html: quotation.description ? quotation.description.replace(/&nbsp;/g, ' ') : '' }}
+                      />
+                      {quotation.date && (
+                        <p style={{ fontSize: '12px', color: '#717fe0', fontWeight: '700', textTransform: 'uppercase' }}>
+                          Date: {new Date(quotation.date).toLocaleDateString()}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="quotation-form-card">
@@ -199,7 +267,7 @@ const Quotation = () => {
                   {loading ? <Loader2 className="animate-spin" /> : "Generate Official Quotation"}
                 </button>
               </div>
-              
+
               <div className="form-footer-link">
                 <a href="mailto:trade-enquiry@parekhrayon.com">trade-enquiry@parekhrayon.com</a>
               </div>
@@ -211,9 +279,9 @@ const Quotation = () => {
           </div>
         </div>
       </div>
-      <SuccessModal 
-        isOpen={showModal} 
-        onClose={() => setShowModal(false)} 
+      <SuccessModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
         title="Quotation Requested"
         message="Your estimate request has been received. Our sales team will prepare a formal quotation and contact you via email."
       />
