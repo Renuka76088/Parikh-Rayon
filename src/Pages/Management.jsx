@@ -1,7 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Loader2 } from "lucide-react";
+import { managementApi, IMAGE_BASE_URL } from "../utils/api";
 import "./Management.css";
 
 const Management = () => {
+  const [pageData, setPageData] = useState({ title: '', description: '' });
+  const [members, setMembers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const [contentRes, membersRes] = await Promise.all([
+          managementApi.getContent('ParekhRayon05'),
+          managementApi.getMembers('ParekhRayon05')
+        ]);
+        if (contentRes.data?.success && contentRes.data?.data) {
+          setPageData(contentRes.data.data);
+        }
+        if (membersRes.data?.success && membersRes.data?.data) {
+          setMembers(membersRes.data.data);
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <section className="management-section">
       {/* Responsive CSS with Header Fix */}
@@ -52,14 +81,8 @@ const Management = () => {
             font-weight: 800;
             color: #222;
             text-transform: uppercase;
-            line-height: 1.1;
-          }
-
-          .management-description {
-            font-size: 18px;
-            line-height: 1.7;
-            color: #555;
-            margin: 0;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
           }
 
           /* Mobile Responsive Fix */
@@ -96,19 +119,59 @@ const Management = () => {
       </style>
 
       <div className="management-container">
-        <div className="management-row">
-          <div className="management-left">
-            <span className="management-label">Industrial Excellence</span>
-            <h2 className="management-title">Our Management</h2>
+        {loading ? (
+          <div style={{ display: 'flex', justifyContent: 'center', margin: '60px 0' }}>
+            <Loader2 className="animate-spin" size={40} color="#717fe0" />
           </div>
-          
-          <div className="management-right">
-            <p className="management-description">
-              Parekh Rayon is administered and governed by the highly skilled, 
-              experienced and qualified Management.
-            </p>
-          </div>
-        </div>
+        ) : (
+          <>
+            <div style={{ textAlign: 'center', maxWidth: '900px', margin: '0 auto 50px' }}>
+              <h2 className="management-title" style={{ marginBottom: '25px', textAlign: 'center' }}>
+                {pageData.title || "Our Management"}
+              </h2>
+              <div
+                className="rte-content w-full max-w-full overflow-hidden text-[#555] text-[18px] leading-relaxed [&>p]:mb-3 [&>img]:max-w-full [&>img]:h-auto [&>img]:mx-auto [&_table]:w-full [&_table]:max-w-full [&_td]:break-words [&_th]:break-words [&>ul]:pl-5 [&>ol]:pl-5"
+                style={{ overflowWrap: 'break-word', wordBreak: 'normal', hyphens: 'none', textAlign: 'center', margin: '0 auto' }}
+                dangerouslySetInnerHTML={{ __html: pageData.description ? pageData.description.replace(/&nbsp;/g, ' ') : "Parekh Rayon is administered and governed by highly skilled management." }}
+              />
+            </div>
+
+            {members.length > 0 && (
+              <div style={{ marginTop: '90px' }}>
+                <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+                  <h3 style={{ fontSize: '32px', fontWeight: '900', color: '#1a1f36', textTransform: 'uppercase', letterSpacing: '-0.5px', marginBottom: '15px' }}>
+                    Leadership Team
+                  </h3>
+                  <div style={{ width: '80px', height: '4px', backgroundColor: '#717fe0', margin: '0 auto', borderRadius: '2px' }}></div>
+                </div>
+                <div style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  justifyContent: 'center',
+                  gap: '40px'
+                }}>
+                  {members.map(member => (
+                    <div key={member._id} style={{ width: '100%', maxWidth: '280px', background: '#fff', borderRadius: '20px', padding: '35px 20px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', boxShadow: '0 10px 40px rgba(36, 47, 89, 0.06)', border: '1px solid #f0f2ff', transition: 'transform 0.3s ease' }}>
+                      <div style={{ width: '130px', height: '130px', borderRadius: '50%', overflow: 'hidden', marginBottom: '20px', backgroundColor: '#f0f2f5', border: '4px solid #fff', boxShadow: '0 4px 15px rgba(0,0,0,0.08)' }}>
+                        {member.image ? (
+                          <img
+                            src={member.image.startsWith('http') ? member.image : `${IMAGE_BASE_URL}/${member.image.replace(/\\/g, '/')}`}
+                            alt={member.name}
+                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                          />
+                        ) : (
+                          <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#aaa', fontSize: '11px', fontWeight: 'bold', textTransform: 'uppercase' }}>No Photo</div>
+                        )}
+                      </div>
+                      <h4 style={{ fontSize: '19px', fontWeight: '900', color: '#1a1f36', marginBottom: '8px', letterSpacing: '-0.3px', textTransform: 'uppercase' }}>{member.name}</h4>
+                      <p style={{ fontSize: '12px', color: '#717fe0', textTransform: 'uppercase', letterSpacing: '1.5px', fontWeight: '800', margin: 0 }}>{member.role}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </>
+        )}
       </div>
     </section>
   );

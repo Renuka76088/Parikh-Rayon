@@ -92,4 +92,33 @@
   .career-icon {
     font-size: 48px;
   }
+
+  .job-card-header {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+
+  .apply-btn-responsive {
+    width: 100%;
+    margin-top: 10px;
+    justify-content: center;
+  }
 }
+
+/* Force Rich Text editor descriptions/content to render at a clean, professional 12px */
+.rte-content, .rte-content * {
+  font-size: 12px !important;
+  line-height: 1.6 !important;
+  color: #555555 !important;
+}
+
+.rte-content ul, .rte-content ol {
+  padding-left: 20px !important;
+  margin-top: 6px !important;
+  margin-bottom: 10px !important;
+}
+
+.rte-content li {
+  list-style-type: disc !important;
+  margin-bottom: 6px !important;
+}

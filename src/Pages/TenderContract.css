@@ -1,6 +1,7 @@
 .tender-section {
-  padding: 4rem 0;
+  padding: 100px 0 80px;
   background: #f8f9ff;
+  min-height: 60vh;
 }
 
 .tender-container {
@@ -16,10 +17,11 @@
 
 .tender-header h3 {
   font-size: clamp(2rem, 2.5vw, 2.5rem);
-  font-weight: 300;
+  font-weight: 800;
   letter-spacing: 3px;
   color: #24262e;
   margin-bottom: 0.75rem;
+  text-transform: uppercase;
 }
 
 .tender-divider {
@@ -35,143 +37,319 @@
 }
 
 .tender-card {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 1rem;
   background: #ffffff;
-  border: 1px solid #e6e6e6;
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
-}
-
-.tender-info {
-  padding: 3.5rem 2.2rem;
-  background: linear-gradient(135deg, #717fe0 0%, #4e59ab 100%);
-  color: #ffffff;
-}
-
-.tender-info h4 {
-  margin: 0;
-  padding-bottom: 0.9375rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  font-size: 1.75rem;
-}
-
-.tender-status {
-  padding: 3.5rem 2.2rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 28px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+  padding: 3rem;
+  margin-bottom: 40px;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* Meta Row containing status badge & date */
+.tender-meta-row {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
-.tender-icon {
-  font-size: 3.125rem;
+.tender-status-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 6px 14px;
+  border-radius: 100px;
+  text-transform: uppercase;
+}
+
+.status-active {
+  background: #e8f7f0;
+  color: #10b981;
+}
+
+.status-closed {
+  background: #fef2f2;
+  color: #ef4444;
+}
+
+.tender-date-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #8b98a5;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.tender-calendar-icon {
+  color: #8b98a5;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Title styles */
+.tender-title {
+  color: #606cc6;
+  /* Deep maroon/red matching user screenshot */
+  font-size: clamp(1.6rem, 2.2vw, 2.2rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem 0;
+  text-align: left;
+  line-height: 1.25;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+}
+
+/* Description container and Left Red vertical indicator */
+.tender-description-container {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.tender-red-bar {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 5px;
+  height: 18px;
+  background-color: #606cc6;
+  /* Matching title color */
+  border-radius: 2px;
+}
+
+.tender-description-text {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #4b5563;
+  /* Dark gray for excellent readability */
+  margin: 0;
+}
+
+/* Prevent word breaking inside description & RTE */
+.tender-description-text,
+.tender-description-text * {
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  hyphens: none !important;
+}
+
+/* Horizontal divider */
+.tender-divider-horizontal {
+  border-top: 1px solid #eaeaea;
+  margin: 1.25rem 0;
+  width: 100%;
+}
+
+/* Critical specifications key points section */
+.tender-specifications-section {
+  text-align: left;
+}
+
+.critical-specifications-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #8b98a5;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0 0 1.25rem 0;
+}
+
+.tender-key-points-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tender-key-point-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  padding: 14px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
+}
+
+.tender-check-icon {
+  color: #10b981;
+  /* Green checkmark icon */
+  flex-shrink: 0;
+}
+
+.tender-key-point-text {
+  font-size: 0.95rem;
+  color: #374151;
+  font-weight: 500;
+  line-height: 1.4;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+}
+
+/* PDF Download Button styles */
+.tender-download-container {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.tender-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #800020;
+  color: #ffffff !important;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 14px 28px;
+  border-radius: 10px;
+  text-decoration: none !important;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(128, 0, 32, 0.15);
+}
+
+.tender-download-btn:hover {
+  background-color: #600018;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(128, 0, 32, 0.25);
+}
+
+/* Two-Column Layout & Sidebar Styles */
+.tender-content-layout {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.tender-main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tender-sidebar {
+  position: sticky;
+  top: 100px;
+}
+
+.tender-sidebar-box {
+  background: #f7f9ff;
+  border: 1px solid rgba(113, 127, 224, 0.12);
+  border-left: 5px solid #717fe0;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 10px 30px rgba(113, 127, 224, 0.03);
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+.tender-sidebar-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(113, 127, 224, 0.08);
+  border-color: rgba(113, 127, 224, 0.25);
+}
+
+.tender-sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tender-sidebar-icon {
   color: #717fe0;
-  opacity: 0.3;
-  margin-bottom: 1.25rem;
 }
 
-.tender-status h4 {
-  font-size: 1.75rem;
+.tender-sidebar-tag {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #717fe0;
+}
+
+.tender-sidebar-highlight {
+  font-size: 1.15rem;
+  font-weight: 800;
   color: #24262e;
-  margin-bottom: 0.625rem;
+  margin-bottom: 12px;
+  line-height: 1.45;
 }
 
-.tender-status p {
-  color: #6b7280;
+.tender-sidebar-text {
+  font-size: 0.9rem;
+  color: #555c6e;
   line-height: 1.6;
   margin: 0;
 }
 
-@media (max-width: 900px) {
-  .tender-card {
+/* Centered Empty State Container */
+.tender-empty-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 40px 1rem;
+}
+
+.tender-sidebar-box.centered {
+  max-width: 580px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  border-left: 1px solid rgba(113, 127, 224, 0.12);
+  border-top: 5px solid #717fe0; /* Top border accent looks premium when centered */
+}
+
+.tender-sidebar-box.centered .tender-sidebar-header {
+  justify-content: center;
+}
+
+/* Empty State Card styling */
+.tender-card.empty-state {
+  border: 2px dashed rgba(113, 127, 224, 0.2);
+  background-color: #fafbff;
+  box-shadow: none;
+}
+
+@media (max-width: 991px) {
+  .tender-content-layout {
     grid-template-columns: 1fr;
+    gap: 30px;
   }
-
-  .tender-info {
-    border-bottom: 1px solid #e6e6e6;
-  }
-}
-
-@media (max-width: 640px) {
-  .tender-info,
-  .tender-status {
-    padding: 2rem 1.25rem;
-  }
-
-  .tender-header h3 {
-    font-size: 2rem;
-    letter-spacing: 2px;
+  
+  .tender-sidebar {
+    position: static;
   }
 }
 
-.tender-section {
-    /* Header ki height ke barabar padding (Usually 80px to 100px) */
-    padding-top: 100px; 
-    padding-bottom: 80px;
-    background-color: #fcfcfc;
-    min-height: 50vh;
-    display: flex;
-    align-items: center;
-}
-
-.tender-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 20px;
-    width: 100%;
-}
-
-.tender-header {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.tender-header h3 {
-    font-weight: 800;
-    letter-spacing: 2px;
-    color: #222;
-}
-
-.tender-divider {
-    width: 50px;
-    height: 3px;
-    background: #717fe0;
-    margin: 15px auto;
-}
-
-/* Responsive Grid/Card Fix */
-.tender-card {
-    background: #fff;
-    border: 1px solid #eee;
-    padding: 40px;
-    text-align: center;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.03);
-}
-
-.tender-status {
-    margin-top: 30px;
-    padding: 30px;
-    background: #fdfdfd;
-    border: 1px dashed #ccc;
-}
-
-.tender-icon i {
-    font-size: 40px;
-    color: #717fe0;
-    margin-bottom: 15px;
-}
-
-/* --- Mobile Responsive --- */
 @media (max-width: 768px) {
-    .tender-section {
-        padding-top: 80px; /* Mobile header thoda chota hota hai */
-    }
-    
-    .tender-card {
-        padding: 20px;
-    }
+  .tender-card {
+    padding: 1.75rem;
+  }
+
+  .tender-red-bar {
+    top: 5px;
+    height: 16px;
+  }
+
+  .tender-sidebar-box {
+    padding: 20px;
+  }
 }

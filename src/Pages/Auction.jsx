@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { auctionApi } from "../utils/api";
+import React, { useState, useEffect } from "react";
+import { auctionApi, eauctionHeaderApi, IMAGE_BASE_URL } from "../utils/api";
 import { Loader2, Eye } from "lucide-react";
 import "./Auction.css";
 import SuccessModal from "../components/common/SuccessModal";
@@ -22,6 +22,39 @@ const Auction = () => {
   const [message, setMessage] = useState({ type: '', text: '' });
   const [showSuccess, setShowSuccess] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
+
+  const [auctions, setAuctions] = useState([]);
+  const [header, setHeader] = useState({ title: "e-Auction Participation", description: "" });
+  const [dataLoading, setDataLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchAuctionData = async () => {
+      try {
+        setDataLoading(true);
+        const [headerRes, auctionsRes] = await Promise.all([
+          eauctionHeaderApi.get(formData.siteId),
+          auctionApi.getAll(formData.siteId)
+        ]);
+
+        if (headerRes.data?.success && headerRes.data?.data) {
+          setHeader({
+            title: headerRes.data.data.title || "e-Auction Participation",
+            description: headerRes.data.data.description || ""
+          });
+        }
+        if (auctionsRes.data?.success && auctionsRes.data?.data) {
+          const activeAuctions = auctionsRes.data.data.filter(a => a.status === 'active');
+          setAuctions(activeAuctions);
+        }
+      } catch (error) {
+        console.error("Error fetching auction data:", error);
+      } finally {
+        setDataLoading(false);
+      }
+    };
+    fetchAuctionData();
+  }, [formData.siteId]);
+
 
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
@@ -100,11 +133,55 @@ const Auction = () => {
       <div className="auction-container">
         <div className="auction-panel status-panel">
           <div className="status-card">
-            <h4>e-Auction Participation</h4>
-            <div className="status-badge">
-              <span>Status:</span>
-              <h2>No e-Auction published</h2>
-            </div>
+            <h4>{header.title}</h4>
+            {header.description && (
+              <div
+                className="rte-content"
+                style={{ fontSize: '15px', color: '#555', lineHeight: '1.6', marginTop: '10px' }}
+                dangerouslySetInnerHTML={{ __html: header.description.replace(/&nbsp;/gi, " ").replace(/\u00a0/g, " ") }}
+              />
+            )}
+
+            {dataLoading ? (
+              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
+                <Loader2 className="animate-spin" size={32} color="#717fe0" />
+              </div>
+            ) : auctions.length > 0 ? (
+              <div className="active-auctions-list" style={{ marginTop: '30px' }}>
+                <h4 style={{ marginBottom: '20px', color: '#5a5cff', fontSize: '20px', fontWeight: '800', textTransform: 'uppercase' }}>Active Auctions</h4>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                  {auctions.map(auction => (
+                    <div key={auction._id} style={{ background: '#fff', padding: '20px', borderRadius: '12px', border: '1px solid #d8dcef', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' }}>
+                      {auction.image && (
+                        <img
+                          src={auction.image.startsWith('http') ? auction.image : `${IMAGE_BASE_URL}/${auction.image.replace(/\\/g, '/')}`}
+                          alt={auction.title}
+                          style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', marginBottom: '15px' }}
+                        />
+                      )}
+                      <h5 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '10px', color: '#252e5a' }}>{auction.title}</h5>
+                      <div
+                        className="rte-content"
+                        dangerouslySetInnerHTML={{ __html: auction.description ? auction.description.replace(/&nbsp;/gi, " ").replace(/\u00a0/g, " ") : "" }}
+                        style={{ fontSize: '14px', color: '#525f7f', marginBottom: '15px', lineHeight: '1.6' }}
+                      />
+                      {auction.date && (
+                        <p style={{ fontSize: '13px', color: '#717fe0', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', margin: 0 }}>
+                          Date: {new Date(auction.date).toLocaleDateString()}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div style={{ marginTop: '30px' }}>
+                <div className="status-badge">
+                  <span>Status:</span>
+                  <h2>No e-Auction published</h2>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 

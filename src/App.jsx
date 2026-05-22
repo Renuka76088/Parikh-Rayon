@@ -19,6 +19,8 @@ import Header from './Home/Header'
 import MapVideo from './Pages/MapVideo'
 import Circular from './Pages/Circular'
 import ScrollToTop from './Components/ScrollToTop'
+import BlogDetail from './Pages/BlogDetail'
+
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
           <Route path='/product' element={<Products />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/blog' element={<Blog />} />
+          <Route path='/blogdetail/:id' element={<BlogDetail />} />
+
 
           <Route path='/appointment' element={<AppointmentForm />} />
           <Route path='/associates' element={<MapVideo />} />
