@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { careerApi, careerHeaderApi } from "../utils/api";
-import { Loader2, Briefcase, MapPin, Clock, Mail, CircleDollarSign } from "lucide-react";
+import { Loader2, Briefcase, MapPin, Clock, Mail, IndianRupee } from "lucide-react";
 import "./Career.css";
 
 const Career = () => {
@@ -89,7 +89,7 @@ const Career = () => {
                         </div>
                         {job.salary && (
                           <div className="flex-m" style={{ gap: '6px', fontSize: '13.5px', color: '#666' }}>
-                            <CircleDollarSign size={14} className="cl6 flex-shrink-0" />
+                            <IndianRupee size={14} className="cl6 flex-shrink-0" />
                             <span>{job.salary.replace(/<[^>]*>?/gm, '')}</span>
                           </div>
                         )}

@@ -130,8 +130,8 @@ const Management = () => {
                 {pageData.title || "Our Management"}
               </h2>
               <div
-                className="rte-content w-full max-w-full overflow-hidden text-[#555] text-[18px] leading-relaxed [&>p]:mb-3 [&>img]:max-w-full [&>img]:h-auto [&>img]:mx-auto [&_table]:w-full [&_table]:max-w-full [&_td]:break-words [&_th]:break-words [&>ul]:pl-5 [&>ol]:pl-5"
-                style={{ overflowWrap: 'break-word', wordBreak: 'normal', hyphens: 'none', textAlign: 'center', margin: '0 auto' }}
+                className="rich-text-content w-full max-w-full overflow-hidden text-[#555] text-[22px] leading-relaxed [&>p]:mb-3 [&>img]:max-w-full [&>img]:h-auto [&>img]:mx-auto [&_table]:w-full [&_table]:max-w-full [&_td]:break-words [&_th]:break-words"
+                style={{ overflowWrap: 'break-word', wordBreak: 'normal', hyphens: 'none', margin: '0 auto' }}
                 dangerouslySetInnerHTML={{ __html: pageData.description ? pageData.description.replace(/&nbsp;/g, ' ') : "Parekh Rayon is administered and governed by highly skilled management." }}
               />
             </div>

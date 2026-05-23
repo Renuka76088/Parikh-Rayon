@@ -1,5 +1,68 @@
 @import "tailwindcss";
 
+/* 
+  Global styles for rich text content from text editors (Quill, CKEditor, etc.)
+  This restores default HTML styles that Tailwind CSS resets.
+*/
+.rich-text-content * {
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  hyphens: none !important;
+  text-align: left;
+}
+
+.rich-text-content ul {
+  list-style-type: disc !important;
+  padding-left: 2rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.rich-text-content ol {
+  list-style-type: decimal !important;
+  padding-left: 2rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.rich-text-content li {
+  display: list-item !important;
+  margin-bottom: 0.25rem !important;
+  list-style-type: inherit !important;
+}
+
+/* Override any strict data-list requirements */
+.rich-text-content li::before {
+  display: none !important;
+}
+
+.rich-text-content h1 { font-size: 2em !important; font-weight: bold !important; margin-bottom: 0.5em !important; margin-top: 1em !important; }
+.rich-text-content h2 { font-size: 1.5em !important; font-weight: bold !important; margin-bottom: 0.5em !important; margin-top: 1em !important; }
+.rich-text-content h3 { font-size: 1.17em !important; font-weight: bold !important; margin-bottom: 0.5em !important; margin-top: 1em !important; }
+.rich-text-content h4 { font-size: 1em !important; font-weight: bold !important; margin-bottom: 0.5em !important; margin-top: 1em !important; }
+.rich-text-content h5 { font-size: 0.83em !important; font-weight: bold !important; margin-bottom: 0.5em !important; margin-top: 1em !important; }
+.rich-text-content h6 { font-size: 0.67em !important; font-weight: bold !important; margin-bottom: 0.5em !important; margin-top: 1em !important; }
+
+.rich-text-content p {
+  margin-bottom: 1rem !important;
+}
+
+.rich-text-content strong, .rich-text-content b {
+  font-weight: bold !important;
+}
+
+.rich-text-content em, .rich-text-content i {
+  font-style: italic !important;
+}
+
+.rich-text-content u {
+  text-decoration: underline !important;
+}
+
+.rich-text-content a {
+  color: #2563eb !important;
+  text-decoration: underline !important;
+}
+
 /* Global Rich Text Editor Format Reset */
 .rte-content, .rte-content *,
 .ql-editor, .ql-editor *,

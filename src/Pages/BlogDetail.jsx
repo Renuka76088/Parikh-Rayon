@@ -61,66 +61,7 @@ const BlogDetail = () => {
 
     return (
         <section className="blog-detail-section p-t-100 p-b-100">
-            <style>
-                {`
-                    .blog-detail-content,
-                    .blog-detail-content * {
-                        max-width: 100% !important;
-                        overflow-wrap: break-word !important;
-                        word-wrap: break-word !important;
-                        word-break: normal !important;
-                        white-space: pre-wrap !important;
-                        hyphens: none !important;
-                    }
-                    .blog-detail-content ul, 
-                    .blog-detail-content ol {
-                        padding-left: 1.5em !important;
-                        margin-bottom: 15px !important;
-                    }
-                    .blog-detail-content li {
-                        list-style-type: none !important;
-                        padding-left: 1.5em !important;
-                        position: relative !important;
-                        margin-bottom: 8px !important;
-                        line-height: 1.8 !important;
-                    }
-                    .blog-detail-content li::before {
-                        display: inline-block !important;
-                        margin-left: -1.5em !important;
-                        margin-right: 0.3em !important;
-                        text-align: right !important;
-                        white-space: nowrap !important;
-                        width: 1.2em !important;
-                        font-weight: normal !important;
-                    }
-                    .blog-detail-content li[data-list=bullet]::before {
-                        content: '\\2022' !important;
-                        font-size: 1.2em !important;
-                        line-height: 1 !important;
-                        color: #333 !important;
-                    }
-                    .blog-detail-content li[data-list=checked]::before {
-                        content: '\\2611' !important;
-                        color: #717fe0 !important;
-                    }
-                    .blog-detail-content li[data-list=unchecked]::before {
-                        content: '\\2610' !important;
-                        color: #777 !important;
-                    }
-                    .blog-detail-content li[data-list=ordered] {
-                        counter-increment: list-0;
-                    }
-                    .blog-detail-content li[data-list=ordered]::before {
-                        content: counter(list-0, decimal) '. ' !important;
-                    }
-                    .blog-detail-content .ql-indent-1:not(.ql-direction-rtl) { padding-left: 3em !important; }
-                    .blog-detail-content li.ql-indent-1:not(.ql-direction-rtl) { padding-left: 4.5em !important; }
-                    .blog-detail-content .ql-indent-2:not(.ql-direction-rtl) { padding-left: 6em !important; }
-                    .blog-detail-content li.ql-indent-2:not(.ql-direction-rtl) { padding-left: 7.5em !important; }
-                    .blog-detail-content .ql-indent-3:not(.ql-direction-rtl) { padding-left: 9em !important; }
-                    .blog-detail-content li.ql-indent-3:not(.ql-direction-rtl) { padding-left: 10.5em !important; }
-                `}
-            </style>
+
             <div className="container">
                 <Link to="/blog" className="back-to-blogs">
                     <ArrowLeft size={18} /> Back to Insights
@@ -143,7 +84,7 @@ const BlogDetail = () => {
                     )}
 
                     <div
-                        className="blog-detail-content ql-editor"
+                        className="rich-text-content blog-detail-content text-[18px] md:text-[20px] leading-relaxed text-gray-700 mt-8"
                         dangerouslySetInnerHTML={{
                             __html: blog.content
                                 ? blog.content

@@ -78,7 +78,7 @@ const Blog = () => {
           <div className="title-line"></div>
 
           <div
-            className="rte-content w-full max-w-full overflow-hidden text-[#555] text-[18px] leading-relaxed mx-auto max-w-4xl blog-subtitle m-t-15 [&>p]:mb-3 [&>img]:hidden [&_table]:hidden [&_td]:break-words [&_th]:break-words [&>ul]:pl-5 [&>ol]:pl-5"
+            className="rich-text-content w-full max-w-full overflow-hidden text-[#555] text-[22px] leading-relaxed mx-auto max-w-4xl blog-subtitle m-t-15 [&>p]:mb-3 [&>img]:hidden [&_table]:hidden"
             style={{ overflowWrap: 'break-word', wordBreak: 'normal', hyphens: 'none', fontStyle: 'italic' }}
             dangerouslySetInnerHTML={{ __html: headerData.description ? headerData.description.replace(/&nbsp;/g, ' ') : "Thoughts, news, and perspectives on the textile industry." }}
           />
@@ -156,11 +156,13 @@ const Blog = () => {
 
 
         {/* Pagination placeholder */}
-        <div className="pagination-wrapper p-t-60">
-          <button className="page-num active">1</button>
-          <button className="page-num">2</button>
-          <button className="page-arrow">Next</button>
-        </div>
+        {blogs.length > 10 && (
+          <div className="pagination-wrapper p-t-60">
+            <button className="page-num active">1</button>
+            <button className="page-num">2</button>
+            <button className="page-arrow">Next</button>
+          </div>
+        )}
       </div>
     </section>
   );
