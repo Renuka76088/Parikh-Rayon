@@ -6,6 +6,7 @@
 .career-container {
   max-width: 1100px;
   margin: 0 auto;
+  margin-top: 30px;
 }
 
 .career-header {
@@ -24,7 +25,7 @@
 
 .career-header p {
   color: #6e7387;
-  font-size: 16px;
+  font-size: 20px;
   margin-bottom: 22px;
 }
 
@@ -63,7 +64,7 @@
 }
 
 .career-note {
-  font-size: 13px;
+  font-size: 15px;
   color: #7c8294;
   margin-top: 20px;
   line-height: 1.8;
@@ -106,13 +107,15 @@
 }
 
 /* Force Rich Text editor descriptions/content to render at a clean, professional 12px */
-.rte-content, .rte-content * {
-  font-size: 12px !important;
+.rte-content,
+.rte-content * {
+  font-size: 16px !important;
   line-height: 1.6 !important;
   color: #555555 !important;
 }
 
-.rte-content ul, .rte-content ol {
+.rte-content ul,
+.rte-content ol {
   padding-left: 20px !important;
   margin-top: 6px !important;
   margin-bottom: 10px !important;
@@ -121,4 +124,4 @@
 .rte-content li {
   list-style-type: disc !important;
   margin-bottom: 6px !important;
-}
+}

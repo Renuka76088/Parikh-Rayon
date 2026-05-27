@@ -6,6 +6,7 @@
 .quotation-container {
   max-width: 1180px;
   margin: 0 auto;
+  margin-top: 30px;
   padding: 0 1rem;
 }
 
@@ -38,7 +39,7 @@
 .quotation-intro p {
   margin: 0;
   color: #4f5568;
-  font-size: 1rem;
+  font-size: 1.15rem;
   line-height: 1.8;
 }
 
@@ -154,6 +155,7 @@
 }
 
 @media (max-width: 640px) {
+
   .quotation-intro,
   .quotation-form-card {
     padding: 2rem 1.25rem;

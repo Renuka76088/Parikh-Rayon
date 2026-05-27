@@ -90,25 +90,27 @@ const Blog = () => {
         </div>
 
         {/* Filter Bar */}
-        <div className="flex-w flex-c-m m-b-40 filter-buttons mt-5 pt-4">
-          <button
-            className={`stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${filter === "*" ? "how-active1" : ""}`}
-            style={{ padding: "8px 20px", borderRadius: "20px", border: "1px solid #ddd", marginBottom: "10px" }}
-            onClick={() => setFilter("*")}
-          >
-            All Insights
-          </button>
-          {categories.map((cat) => (
+        {blogs.length > 0 && (
+          <div className="flex-w flex-c-m m-b-40 filter-buttons mt-5 pt-4">
             <button
-              key={cat}
-              className={`stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${filter === cat ? "how-active1" : ""}`}
+              className={`stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${filter === "*" ? "how-active1" : ""}`}
               style={{ padding: "8px 20px", borderRadius: "20px", border: "1px solid #ddd", marginBottom: "10px" }}
-              onClick={() => setFilter(cat)}
+              onClick={() => setFilter("*")}
             >
-              {cat}
+              All Insights
             </button>
-          ))}
-        </div>
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                className={`stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${filter === cat ? "how-active1" : ""}`}
+                style={{ padding: "8px 20px", borderRadius: "20px", border: "1px solid #ddd", marginBottom: "10px" }}
+                onClick={() => setFilter(cat)}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Blog Grid */}
         <div className="blog-grid">

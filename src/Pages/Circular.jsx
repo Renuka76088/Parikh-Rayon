@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { circularApi, circularHeaderApi } from "../utils/api";
-import { Loader2, FileText, Calendar, Eye, Download, FileQuestion, Printer } from "lucide-react";
+import { circularApi, circularHeaderApi, IMAGE_BASE_URL } from "../utils/api";
+import { Loader2, FileText, Calendar, Eye, Download, BellOff, Printer } from "lucide-react";
 import "./Circular.css";
 
 const Circular = () => {
@@ -70,7 +70,7 @@ const Circular = () => {
   const handlePrint = async (url, id) => {
     setPrintingId(id);
     try {
-      const fileUrl = url.startsWith('http') ? url : `http://localhost:2000/${url}`;
+      const fileUrl = url.startsWith('http') ? url : `${IMAGE_BASE_URL}/${url}`;
       const response = await fetch(fileUrl);
       const blob = await response.blob();
       const blobUrl = URL.createObjectURL(blob);
@@ -87,7 +87,7 @@ const Circular = () => {
       if (oldIframe) {
         try {
           document.body.removeChild(oldIframe);
-        } catch (e) {}
+        } catch (e) { }
       }
 
       iframe.id = 'pdf-print-iframe';
@@ -103,7 +103,7 @@ const Circular = () => {
             try {
               document.body.removeChild(iframe);
               URL.revokeObjectURL(blobUrl);
-            } catch (e) {}
+            } catch (e) { }
           }, 60000);
         }, 300);
       };
@@ -111,7 +111,7 @@ const Circular = () => {
       console.error('Print failed:', err);
       setPrintingId(null);
       // Fallback: Open in new tab
-      window.open(url.startsWith('http') ? url : `http://localhost:2000/${url}`, '_blank');
+      window.open(url.startsWith('http') ? url : `${IMAGE_BASE_URL}/${url}`, '_blank');
     }
   };
 
@@ -142,7 +142,7 @@ const Circular = () => {
                 {item.pdfUrl && (
                   <div className="circular-btn-group">
                     <a
-                      href={item.pdfUrl.startsWith('http') ? item.pdfUrl : `http://localhost:2000/${item.pdfUrl}`}
+                      href={item.pdfUrl.startsWith('http') ? item.pdfUrl : `${IMAGE_BASE_URL}/${item.pdfUrl}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="circular-btn circular-btn-view"
@@ -174,7 +174,7 @@ const Circular = () => {
           ) : (
             <div className="circular-empty">
               <div className="circular-empty-icon">
-                <FileQuestion size={80} strokeWidth={1} />
+                <BellOff size={80} strokeWidth={1} />
               </div>
               <h4>No Circulars Found</h4>
               <p>

@@ -314,7 +314,8 @@
   margin: 0 auto;
   text-align: center;
   border-left: 1px solid rgba(113, 127, 224, 0.12);
-  border-top: 5px solid #717fe0; /* Top border accent looks premium when centered */
+  border-top: 5px solid #717fe0;
+  /* Top border accent looks premium when centered */
 }
 
 .tender-sidebar-box.centered .tender-sidebar-header {
@@ -333,7 +334,7 @@
     grid-template-columns: 1fr;
     gap: 30px;
   }
-  
+
   .tender-sidebar {
     position: static;
   }
