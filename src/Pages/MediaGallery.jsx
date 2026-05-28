@@ -49,6 +49,7 @@ const MediaGallery = () => {
             id: m._id,
             category: m.category || "General",
             title: m.title,
+            date: m.date || m.createdAt,
             image: m.image.replace(/\\/g, '/') && (m.image.startsWith("http") ? m.image : `${IMAGE_BASE_URL}/${m.image.replace(/\\/g, '/')}`)
           }));
           setMediaItems(dynamicMedia);
@@ -150,7 +151,10 @@ const MediaGallery = () => {
                     ...textAnimStyle,
                     transform: hoveredId === item.id ? "translateY(0)" : "translateY(20px)"
                   }}>
-                    <p style={categoryLabel}>{item.category.toUpperCase()}</p>
+                    <p style={categoryLabel}>
+                      {item.category.toUpperCase()}
+                      {item.date && ` • ${new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`}
+                    </p>
                     <h4 style={itemTitle}>{item.title}</h4>
                     <div style={btnCircle}>+</div>
                   </div>

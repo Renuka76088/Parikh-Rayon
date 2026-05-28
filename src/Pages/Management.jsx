@@ -80,7 +80,6 @@ const Management = () => {
             font-size: 42px;
             font-weight: 800;
             color: #222;
-            text-transform: uppercase;
             line-height: 1.2;
             letter-spacing: -0.5px;
           }
@@ -163,8 +162,8 @@ const Management = () => {
                           <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#aaa', fontSize: '11px', fontWeight: 'bold', textTransform: 'uppercase' }}>No Photo</div>
                         )}
                       </div>
-                      <h4 style={{ fontSize: '19px', fontWeight: '900', color: '#1a1f36', marginBottom: '8px', letterSpacing: '-0.3px', textTransform: 'uppercase' }}>{member.name}</h4>
-                      <p style={{ fontSize: '12px', color: '#717fe0', textTransform: 'uppercase', letterSpacing: '1.5px', fontWeight: '800', margin: 0 }}>{member.role}</p>
+                      <h4 style={{ fontSize: '19px', fontWeight: '900', color: '#1a1f36', marginBottom: '8px', letterSpacing: '-0.3px' }}>{member.name}</h4>
+                      <p style={{ fontSize: '12px', color: '#717fe0', letterSpacing: '1.5px', fontWeight: '800', margin: 0 }}>{member.role}</p>
                     </div>
                   ))}
                 </div>

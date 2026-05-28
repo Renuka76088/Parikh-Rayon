@@ -241,16 +241,12 @@ const Products = () => {
                       <a href="#" className="stext-104 cl4 hov-cl1 trans-04 p-b-6" style={{ fontSize: '14px', fontWeight: '700', textTransform: 'uppercase' }}>
                         {item.name}
                       </a>
-                      <span className="stext-105 cl3" style={{ fontSize: '12px', color: '#999' }}>
-                        Parekh Premium
+                      <span className="stext-105 cl3" style={{ fontSize: '12px', color: '#999', textTransform: 'capitalize' }}>
+                        {item.category ? item.category.replace(/-/g, ' ') : ''}
                       </span>
                     </div>
 
-                    <div className="block2-txt-child2 flex-r p-t-3">
-                      <a href="#" className="btn-addwish-b2 dis-block pos-relative trans-04">
-                        <i className="zmdi zmdi-favorite-outline cl2 fs-20 hov-cl1 trans-04"></i>
-                      </a>
-                    </div>
+
                   </div>
                 </div>
               </div>
